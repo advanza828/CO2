@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>石油化工企业碳排放核算图解 | GB/T 32151.15-2023 专业指南</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f4f9;
+            font-family: 'Inter', sans-serif;
+            color: #1a2c3e;
+            line-height: 1.45;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        /* 标题与卡片 */
+        .hero {
+            background: linear-gradient(135deg, #0b2b3b 0%, #144d5c 100%);
+            color: white;
+            padding: 2rem 2rem;
+            border-radius: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 25px -12px rgba(0,0,0,0.2);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 85%;
+        }
+        .badge {
+            background: #ffb34720;
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+        .section-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: all 0.2s;
+            border: 1px solid #e2edf2;
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-left: 6px solid #1f8a4c;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+            color: #0e4b3a;
+        }
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem 0;
+            color: #1f6e43;
+            border-bottom: 2px solid #cbe5da;
+            padding-bottom: 0.4rem;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1.5rem;
+        }
+        .info-card {
+            background: #f9fdfb;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #d4e2dc;
+            height: 100%;
+        }
+        .info-card h3 {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #12503b;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .formula {
+            background: #eef3fa;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            border-left: 4px solid #2c7a4b;
+            margin: 0.8rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+        th {
+            background: #e5f0ec;
+            padding: 0.7rem 0.8rem;
+            text-align: center;
+            font-weight: 600;
+            color: #1c4e3d;
+            border-bottom: 1px solid #cbdcd4;
+        }
+        td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid #e2edf2;
+            text-align: center;
+            background-color: white;
+        }
+        .table-caption {
+            font-size: 0.75rem;
+            text-align: left;
+            margin-top: 0.3rem;
+            color: #5f7f6e;
+        }
+        .footnote {
+            font-size: 0.75rem;
+            color: #6c7e76;
+            background: #f8fbf9;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            margin-top: 0.8rem;
+        }
+        .flow-mermaid {
+            background: #fafefc;
+            border-radius: 1.2rem;
+            padding: 0.8rem;
+            margin: 1rem 0;
+        }
+        hr {
+            margin: 1.2rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cce3db, transparent);
+        }
+        @media (max-width: 700px) {
+            .section-card {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            td, th {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+        }
+        .parameter-table {
+            font-size: 0.8rem;
+        }
+        .highlight {
+            background: #fff2db;
+            border-left: 3px solid #f4b942;
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { background: '#ffffff', primaryColor: '#1f8a4c', lineColor: '#2c7a4b' }, flowchart: { useMaxWidth: true, htmlLabels: true } });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>📊 石油化工企业碳排放核算图解</h1>
+        <p>依据 GB/T 32151.15-2023《碳排放核算与报告要求 第15部分：石油化工企业》编制<br>适用于石油、天然气为主要原料的炼化企业 — 核算边界 · 量化公式 · 监测参数 · 缺省值速查</p>
+        <div class="badge">仅核算 CO₂ | 法人边界 | 燃料燃烧+火炬+过程+电热+回收利用</div>
+    </div>
+
+    <!-- 1. 核算边界及排放源 -->
+    <div class="section-card">
+        <div class="section-title">🏭 核算边界与排放源识别</div>
+        <div class="grid-2col">
+            <div class="info-card">
+                <h3>📍 组织边界</h3>
+                <p>法人企业或视同法人的独立核算单位，包含<strong>主要生产系统、辅助生产系统（动力/供电/供水/化验/机修/库房/运输）及附属生产系统</strong>（厂部、职工食堂、浴室等）。</p>
+                <p class="highlight" style="margin-top: 8px;">✅ 绿色电力单独报告，不直接扣减排放量。</p>
+            </div>
+            <div class="info-card">
+                <h3>🔥 必须核算的六类排放</h3>
+                <ul style="margin-left: 1.2rem;">
+                    <li>✔ 化石燃料燃烧排放 (锅炉/加热炉/移动源)</li>
+                    <li>✔ 火炬系统排放 (正常/非正常工况)</li>
+                    <li>✔ 工艺过程排放 (催化剂烧焦、制氢、煅烧、氧化沥青、乙烯裂解等)</li>
+                    <li>✔ 二氧化碳回收利用量 (扣减)</li>
+                    <li>✔ 购入电力/热力排放</li>
+                    <li>✔ 输出电力/热力排放 (扣减)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="flow-mermaid">
+            <pre class="mermaid" style="background: transparent;">
+                graph TD
+                A[报告主体边界] --> B(燃料燃烧排放)
+                A --> C(火炬系统排放)
+                A --> D(过程排放: 催化裂化/重整/制氢/焦化/煅烧/沥青/乙烯/环氧乙烷/脱硫)
+                A --> E(CO2回收利用)
+                A --> F(购入电力+热力)
+                A --> G(输出电力+热力)
+                B --> H[总排放量]
+                C --> H
+                D --> H
+                E -.->|扣除| H
+                F --> H
+                G -.->|扣除| H
+                style H fill:#d9f0e6,stroke:#1f8a4c,stroke-width:2px
+            </pre>
+            <div class="table-caption">▲ 图A.1 石油化工企业碳排放核算边界示意（核心排放源）</div>
+        </div>
+    </div>
+
+    <!-- 2. 核心计算公式汇总 -->
+    <div class="section-card">
+        <div class="section-title">🧮 碳排放总量计算公式 (核心)</div>
+        <div class="formula">
+            E = E<sub>燃烧</sub> + E<sub>火炬</sub> + E<sub>过程</sub> - R<sub>回收</sub> + E<sub>购入电</sub> + E<sub>购入热</sub> - E<sub>输出电</sub> - E<sub>输出热</sub>
+        </div>
+        <div class="grid-2col">
+            <div class="info-card"><h3>📌 化石燃料燃烧排放</h3><div class="formula">E<sub>燃烧</sub> = Σ<sub>i,j</sub> (AD<sub>i,j</sub> × CC<sub>i,j</sub> × OF<sub>i,j</sub> × 44/12)</div><p>AD:燃料消耗量(t或万Nm³)；CC:含碳量(tC/t或tC/万Nm³)；OF:碳氧化率(缺省值见表C.1)</p></div>
+            <div class="info-card"><h3>🔥 火炬系统排放</h3><div class="formula">E<sub>火炬</sub>=E<sub>正常火炬</sub>+E<sub>非正常火炬</sub></div><p>正常工况基于火炬气流量&含碳量；非正常工况基于平均气流速度×持续时间×含碳原子数，燃烧效率98%</p></div>
+            <div class="info-card"><h3>⚙️ 典型过程排放示例</h3>
+                <ul style="font-size:0.85rem;">
+                    <li><strong>催化裂化连续烧焦</strong>: E = MC × CF × OF × 44/12</li>
+                    <li><strong>石油焦煅烧</strong>: (生焦碳量 - 成品焦碳量) × 44/12</li>
+                    <li><strong>环氧乙烷/乙二醇</strong>: 碳质量平衡法 (原料碳 - 产品碳) ×44/12</li>
+                    <li><strong>碳酸盐脱硫</strong>: Σ(消耗量×组分含量×CO₂质量分数×分解率100%)</li>
+                </ul>
+            </div>
+            <div class="info-card"><h3>⚡ 电力和热力排放</h3><div class="formula">E<sub>购入电</sub> = AD<sub>购入电</sub> × EF<sub>电力</sub><br>E<sub>购入热</sub> = AD<sub>购入热</sub> × EF<sub>热力</sub> (0.11 tCO₂/GJ 缺省)</div><p>电力排放因子采用国家最新发布值，热力优先实测。</p></div>
+        </div>
+        <div class="footnote">※ 详细分项公式参见标准6.2.2~6.2.6；火炬气含碳量基于气体组分计算（公式7），非正常工况火炬组分可取C5(炼油)或C3(化工)。</div>
+    </div>
+
+    <!-- 3. 计量与监检测关键参数表（摘录）-->
+    <div class="section-card">
+        <div class="section-title">📏 计量与监检测要求速查</div>
+        <div class="subsection-title">表1 主要排放源计量参数识别 (关键项)</div>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead><tr><th>排放源</th><th>具体过程</th><th>监测参数</th><th>计量器具/方法</th></tr></thead>
+                <tbody>
+                    <tr><td>化石燃料燃烧</td><td>煤/油/气燃烧</td><td>燃料消耗量、低位发热量/元素碳</td><td>衡器/流量计、检测报告</td></tr>
+                    <tr><td>火炬系统</td><td>正常/非正常火炬</td><td>火炬气流量、气体组分、燃烧时间</td><td>气体流量计(2.0级)、组分分析</td></tr>
+                    <tr><td>催化裂化烧焦</td><td>连续烧焦</td><td>烧焦量、焦层含碳量</td><td>衡器/化学计算、检测报告</td></tr>
+                    <tr><td>制氢装置</td><td>脱碳过程</td><td>副产气体流量、CO/CO₂浓度</td><td>气体流量计(2.0级)、气相色谱</td></tr>
+                    <tr><td>石油焦煅烧</td><td>质量平衡</td><td>生焦/成品质量、含碳量</td><td>衡器(0.1级)、含碳量检测</td></tr>
+                    <tr><td>碳酸盐脱硫</td><td>分解排放</td><td>碳酸盐消耗量、组分含量</td><td>衡器、GB/T 3286.1/.9</td></tr>
+                    <tr><td>CO₂回收利用</td><td>气体/液体</td><td>回收量、CO₂纯度</td><td>气体流量计/衡器、浓度检测仪</td></tr>
+                    <tr><td>购入/输出电力</td><td>—</td><td>电量(MWh)</td><td>电表(符合GB17167)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="subsection-title">⚙️ 计量器具准确度及溯源要求（部分）</div>
+        <table>
+            <thead><tr><th>燃料/介质类型</th><th>计量器具</th><th>准确度等级</th><th>溯源周期</th><th>记录频次</th></tr></thead>
+            <tbody>
+                <tr><td>固态燃料(煤炭)</td><td>非自动衡器/皮带秤</td><td>0.1 / 0.5</td><td>1次/12个月</td><td>每批/每月</td></tr>
+                <tr><td>液态燃料(成品油/重油)</td><td>液体流量计</td><td>0.5 / 1.0</td><td>1次/12个月</td><td>每批</td></tr>
+                <tr><td>气态燃料(天然气等)</td><td>气体流量计</td><td>2.0</td><td>检定/校准1次/年</td><td>连续/每月汇总</td></tr>
+                <tr><td>火炬气流量</td><td>气体流量计</td><td>2.0</td><td>1次/12个月</td><td>连续/每天记录</td></tr>
+                <tr><td>CO₂回收(气态)</td><td>气体流量计+浓度仪</td><td>2.0 / 2.0</td><td>1次/年</td><td>连续/每天</td></tr>
+            </tbody>
+        </table>
+        <div class="table-caption">※ 详细要求见标准第5章，所有计量设备须定期检定/校准并建立档案。</div>
+    </div>
+
+    <!-- 4. 缺省值核心数据表 附录C-->
+    <div class="section-card">
+        <div class="section-title">📚 缺省值参考 (附录C) — 专业人员速查</div>
+        <div class="subsection-title">表C.1 常见化石燃料相关参数（摘录）</div>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead><tr><th>燃料品种</th><th>单位</th><th>低位发热量 (GJ/t或GJ/10⁴Nm³)</th><th>单位热值含碳量 (tC/GJ)</th><th>碳氧化率 (%)</th></tr></thead>
+                <tbody>
+                    <tr><td>无烟煤</td><td>t</td><td>26.7</td><td>27.4×10⁻³</td><td>94</td></tr>
+                    <tr><td>烟煤</td><td>t</td><td>19.570</td><td>26.1×10⁻³</td><td>93</td></tr>
+                    <tr><td>焦炭</td><td>t</td><td>28.435</td><td>29.5×10⁻³</td><td>93</td></tr>
+                    <tr><td>石油焦</td><td>t</td><td>32.5</td><td>27.50×10⁻³</td><td>98</td></tr>
+                    <tr><td>原油</td><td>t</td><td>41.816</td><td>20.1×10⁻³</td><td>98</td></tr>
+                    <tr><td>汽油</td><td>t</td><td>43.070</td><td>18.9×10⁻³</td><td>98</td></tr>
+                    <tr><td>柴油</td><td>t</td><td>42.652</td><td>20.2×10⁻³</td><td>98</td></tr>
+                    <tr><td>燃料油</td><td>t</td><td>41.816</td><td>21.1×10⁻³</td><td>98</td></tr>
+                    <tr><td>液化石油气</td><td>t</td><td>50.179</td><td>17.2×10⁻³</td><td>98</td></tr>
+                    <tr><td>天然气</td><td>10⁴Nm³</td><td>389.31</td><td>15.3×10⁻³</td><td>99</td></tr>
+                    <tr><td>炼厂干气</td><td>t</td><td>45.998</td><td>18.2×10⁻³</td><td>99</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="subsection-title">表C.2 常见碳酸盐的CO₂质量分数</div>
+        <table style="width: 60%; min-width: 260px;">
+            <thead><tr><th>碳酸盐</th><th>CO₂质量分数 (tCO₂/t碳酸盐)</th></tr></thead>
+            <tbody>
+                <tr><td>CaCO₃</td><td>0.440</td></tr><tr><td>MgCO₃</td><td>0.522</td></tr><tr><td>Na₂CO₃</td><td>0.415</td></tr><tr><td>NaHCO₃</td><td>0.524</td></tr><tr><td>CaMg(CO₃)₂</td><td>0.477</td></tr>
+            </tbody>
+        </table>
+        <div class="subsection-title">📈 热力转换参考 (热水/蒸汽热量计算)</div>
+        <div class="formula">
+            热水: AD<sub>热水</sub> = Ma<sub>w</sub> × (T<sub>w</sub>-20) × 4.1868×10⁻³ (GJ)<br>
+            蒸汽: AD<sub>蒸汽</sub> = Ma<sub>st</sub> × (En<sub>st</sub> - 83.74)×10⁻³ (GJ)
+        </div>
+        <p class="footnote">注：饱和/过热蒸汽热焓En<sub>st</sub>详细数据参见标准附录C表C.3/C.4（可依据压力温度查取）。</p>
+        <details style="margin-top: 0.5rem; font-size:0.85rem; background:#f9f6ef; padding:0.6rem; border-radius: 12px;">
+            <summary style="font-weight:600;">📖 查看饱和蒸汽焓值简表 (部分压力)</summary>
+            <table style="margin-top: 8px;">
+                <thead><tr><th>压力 (MPa)</th><th>温度 (°C)</th><th>焓 (kJ/kg)</th><th>压力 (MPa)</th><th>温度 (°C)</th><th>焓 (kJ/kg)</th></tr></thead>
+                <tbody>
+                    <tr><td>0.001</td><td>6.98</td><td>2513.8</td><td>0.5</td><td>151.85</td><td>2748.5</td></tr>
+                    <tr><td>0.01</td><td>45.83</td><td>2584.4</td><td>1.0</td><td>179.88</td><td>2777.0</td></tr>
+                    <tr><td>0.1</td><td>99.63</td><td>2675.7</td><td>2.0</td><td>212.37</td><td>2797.4</td></tr>
+                    <tr><td>0.3</td><td>133.54</td><td>2725.5</td><td>5.0</td><td>263.92</td><td>2792.8</td></tr>
+                    <tr><td>0.6</td><td>158.84</td><td>2756.4</td><td>10.0</td><td>310.96</td><td>2724.4</td></tr>
+                </tbody>
+            </table>
+            <div class="table-caption">完整数据参考GB/T 32151.15-2023 附录C 表C.3</div>
+        </details>
+    </div>
+
+    <!-- 5. 过程排放关键装置核算要点 -->
+    <div class="section-card">
+        <div class="section-title">🏭 重点工艺过程排放核算速览</div>
+        <div class="grid-2col">
+            <div class="info-card"><h3>🔁 催化重整间歇烧焦</h3><div class="formula">E = MC × (CF<sub>前</sub> - (1-CF<sub>前</sub>)/(1-CF<sub>后</sub>)×CF<sub>后</sub>) × OF ×44/12</div><p>MC:待再生催化剂量；CF前/后：再生前后含碳量。</p></div>
+            <div class="info-card"><h3>💨 制氢装置排放</h3><div class="formula">E = Σ(Q<sub>i</sub>×T×(Con<sub>CO2,i</sub>+Con<sub>CO,i</sub>)×19.77×10⁻⁴)</div><p>直接测量副产气中CO₂+CO浓度，或使用碳质量平衡法。</p></div>
+            <div class="info-card"><h3>🔥 乙烯裂解炉管烧焦</h3><div class="formula">E = Q<sub>wg</sub> × T × (CO₂%+CO%) × 19.77×10⁻⁴</div><p>监测烧焦尾气流量及CO/CO₂浓度，累计烧焦时间。</p></div>
+            <div class="info-card"><h3>🧪 其他产品生产 (碳平衡)</h3><div class="formula">E<sub>其他</sub> = [Σ(原料碳) - Σ(产品碳) - Σ(废弃物碳)] ×44/12</div><p>适用于甲醇、丙烯腈、碳黑等装置，含碳量可实测或按化学计量。</p></div>
+        </div>
+        <div class="footnote">⚡ 若连续烧焦尾气进入一氧化碳锅炉回收热量，则计入燃料燃烧排放，避免重复计算。</div>
+    </div>
+
+    <!-- 6. 数据质量与报告要求 -->
+    <div class="section-card">
+        <div class="section-title">📋 数据质量管理 & 报告框架</div>
+        <div class="grid-2col">
+            <div class="info-card">
+                <h3>📌 质量控制要点</h3>
+                <ul style="margin-left: 1rem;">
+                    <li>建立碳排放核算规章制度，指定专职人员</li>
+                    <li>制定数据质量控制计划（参考附录D模板）</li>
+                    <li>定期维护计量器具，保留检定/校准记录</li>
+                    <li>交叉校验活动数据（如燃料消耗与库存变化）</li>
+                    <li>内部审核制度，识别数据风险并修正</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>📄 报告内容必备项</h3>
+                <ul>
+                    <li>报告主体基本信息（法人、行业、工艺流程）</li>
+                    <li>年度碳排放总量及各分项排放量</li>
+                    <li>活动数据及其来源、监测方法、仪表精度</li>
+                    <li>排放因子及来源（实测或缺省值依据）</li>
+                    <li>绿色电力使用说明及其他协同处置信息</li>
+                    <li>附表B.1~B.17 数据汇总表格</li>
+                </ul>
+            </div>
+        </div>
+        <div class="subsection-title">🔎 交叉校验示例：化石燃料燃烧排放校验</div>
+        <div class="formula">
+            基于燃料低位发热量&单位热值含碳量计算含碳量 → 与元素分析实测值比对偏差；碳氧化率优先采用实测，否则使用缺省值。
+        </div>
+        <div class="footnote">★ 报告格式模板参照标准附录B，附录D提供了数据质量控制计划（监测频次、仪器信息、参数获取方式）。</div>
+    </div>
+
+    <!-- 7. CO₂回收利用与电热扣减 -->
+    <div class="section-card">
+        <div class="section-title">♻️ 二氧化碳回收利用 & 电热抵消处理</div>
+        <div class="grid-2col">
+            <div class="info-card">
+                <h3>💨 回收量扣除公式</h3>
+                <div class="formula">气态: R<sub>回收</sub> = Q<sub>CO₂</sub> × PUR<sub>CO₂</sub> × 19.77</div>
+                <div class="formula">液态: R<sub>回收</sub> = M<sub>CO₂</sub> × PUR<sub>CO₂</sub></div>
+                <p>纯度PUR<sub>CO₂</sub>依据实测浓度，必须免于排入大气。</p>
+            </div>
+            <div class="info-card">
+                <h3>⚡ 输出电力/热力扣除</h3>
+                <p>E<sub>输出电</sub> = AD<sub>输出电</sub> × EF<sub>电力</sub> （与购入电力采用同一排放因子）<br>E<sub>输出热</sub> = AD<sub>输出热</sub> × EF<sub>热力</sub>（EF<sub>热力</sub>缺省0.11 tCO₂/GJ）</p>
+                <p class="highlight">注意：若输出热力有供热单位实测值则优先采用实测排放因子。</p>
+            </div>
+        </div>
+        <hr>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; background:#eef5f1; border-radius: 1rem; padding: 1rem;">
+            <div><strong>✅ 核算步骤总结</strong><br>1.确定边界 & 排放源 → 2.数据质量控制计划 → 3.收集活动数据&排放因子 → 4.计算分项排放 → 5.汇总总量 → 6.报告与内审</div>
+            <div><strong>📌 关键提醒</strong><br>化石燃料作为原料的消耗不计入燃烧排放，应纳入过程排放或单独核算。绿色电力不应直接扣减排放量，单独说明。</div>
+        </div>
+    </div>
+
+    <!-- 8. 规范性引用与编制信息 -->
+    <div class="section-card" style="background: #fafbfd;">
+        <div class="section-title">📎 规范性引用 & 说明</div>
+        <p>主要依据标准：GB/T 32150, GB/T 17167, GB/T 213, GB/T 384, GB/T 476, GB/T 13610, GB/T 11062, NB/SH/T 0656 等。本图解归纳自GB/T 32151.15-2023，供石油化工企业碳排放核算专业人员参考使用，实际核算应遵循最新标准及主管部门发布的数据。缺省值及公式符合IPCC指南及中国能源统计年鉴。</p>
+        <div class="footnote" style="margin-top: 1rem;">⚠️ 本图解仅展示核心框架，具体装置参数检测频率、气体组分分析应严格执行标准第5章及附录D质量控制计划。</div>
+        <div style="margin-top: 1rem; font-size:0.7rem; color:#6c8b7c;">编制依据：GB/T 32151.15-2023 正式版 | 碳排放核算与报告要求 第15部分 | 适用于石油炼制及石油化工企业</div>
+    </div>
+</div>
+</body>
+</html>
