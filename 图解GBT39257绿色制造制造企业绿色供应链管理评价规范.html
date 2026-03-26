@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>图解 | GB/T 39257-2020 绿色供应链管理评价规范</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f7f0;
+            color: #1e2a2e;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        /* header */
+        .hero {
+            background: linear-gradient(135deg, #1b4d2e 0%, #2a6e3f 100%);
+            color: white;
+            border-radius: 2rem;
+            padding: 2rem 2rem 2rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+        .hero .sub {
+            font-size: 1rem;
+            opacity: 0.9;
+            border-left: 3px solid #a3e635;
+            padding-left: 1rem;
+            margin: 0.75rem 0 1rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        /* 卡片通用样式 */
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.2s;
+            border: 1px solid #e2f0e2;
+        }
+        .card:hover {
+            box-shadow: 0 12px 24px -8px rgba(0,32,0,0.12);
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-left: 5px solid #2e7d32;
+            padding-left: 1rem;
+            color: #1a3b2f;
+        }
+        .section-title i {
+            color: #2e7d32;
+            font-size: 1.6rem;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .info-block {
+            background: #f9fef7;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #d9ead3;
+            height: 100%;
+        }
+        .info-block h3 {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1f5437;
+        }
+        .info-block ul, .info-block p {
+            font-size: 0.9rem;
+            color: #2c4238;
+        }
+        .indicator-category {
+            background: #fefdf8;
+            border-radius: 1.2rem;
+            padding: 0.2rem 0;
+        }
+        .indicator-header {
+            background: #eef5ea;
+            padding: 0.7rem 1rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0.8rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1b4d2e;
+        }
+        .indicator-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem 0.5rem;
+        }
+        .indicator-item {
+            background: white;
+            border-radius: 2rem;
+            padding: 0.25rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid #cde2c5;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+        .mandatory {
+            background: #fff1e0;
+            border-left: 4px solid #e67e22;
+            font-weight: 600;
+            color: #b85b0e;
+        }
+        .badge-must {
+            background: #e67e22;
+            color: white;
+            font-size: 0.65rem;
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+        .score-table, .level-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .score-table th, .level-table th, .level-table td {
+            border: 1px solid #cde0cd;
+            padding: 0.7rem;
+            text-align: left;
+        }
+        .score-table th, .level-table th {
+            background: #eaf4e5;
+            font-weight: 600;
+        }
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .step {
+            flex: 1;
+            background: #f6faf3;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            min-width: 120px;
+            border-top: 4px solid #4caf50;
+        }
+        .step i {
+            font-size: 1.8rem;
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cfe3cf, transparent);
+        }
+        .footnote {
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 2rem;
+            color: #5f7c6b;
+        }
+        @media (max-width: 800px) {
+            body { padding: 1rem; }
+            .grid-2col { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部信息 -->
+    <div class="hero">
+        <h1>🌿 绿色制造 · 绿色供应链管理评价规范</h1>
+        <div class="sub">GB/T 39257-2020 | 制造企业绿色供应链管理评价与改进依据</div>
+        <div class="hero-badge">
+            <span class="badge"><i class="fas fa-chart-line"></i> 自我评价 / 第二方 / 第三方</span>
+            <span class="badge"><i class="fas fa-sync-alt"></i> 全生命周期</span>
+            <span class="badge"><i class="fas fa-leaf"></i> 绿色采购·生产·物流·回收</span>
+            <span class="badge"><i class="fas fa-balance-scale"></i> 定量+定性评价</span>
+        </div>
+    </div>
+
+    <!-- 范围 & 目的 & 基本要求 (左右) -->
+    <div class="grid-2col">
+        <div class="card">
+            <div class="section-title" style="border-left-color: #2c7a47;"><i class="fas fa-bullseye"></i> 评价目的与范围</div>
+            <div class="info-block" style="background: transparent; padding-top: 0;">
+                <p><strong>🎯 评价目的：</strong>评估企业供应链绿色化程度，识别改进空间，为绿色采购和持续提升提供依据。</p>
+                <p><strong>🌍 评价范围：</strong>产品全生命周期（设计→采购→生产→物流→使用→回收处置），覆盖供应商、物流商、销售商、回收方等上下游相关方。</p>
+                <p><strong>📌 适用对象：</strong>制造企业自我评价、采购方（第二方）评价、第三方认证评价。</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="section-title" style="border-left-color: #2c7a47;"><i class="fas fa-building"></i> 企业基本要求 & 评价原则</div>
+            <div class="info-block" style="background: transparent; padding-top: 0;">
+                <p><strong>✅ 基本要求：</strong>企业应依法设立，近三年无重大环境、安全、质量事故；符合产业政策，建立绿色供应链管理方针与目标。</p>
+                <p><strong>⚖️ 评价原则：</strong>全面性、系统性、客观性、公正性；基于生命周期思想，动态调整指标，确保数据真实可追溯。</p>
+                <p><strong>📊 评分模型：</strong>总分100分（权重/分值由行业或企业自定，必选指标一票否决）。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 核心评价指标体系（7个一级指标 + 二级明细） -->
+    <div class="card">
+        <div class="section-title"><i class="fas fa-list-ul"></i> 核心评价指标体系</div>
+        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #3a5a48;"><i class="fas fa-info-circle"></i> 一级指标共7项，二级指标覆盖全供应链。带 <span class="badge-must" style="background:#e67e22;">必选</span> 标志为必选指标，缺项或不符合则直接不合格。</p>
+        
+        <!-- 一级指标 1 战略及目标 -->
+        <div class="indicator-header"><i class="fas fa-flag-checkered"></i> 1. 战略及目标</div>
+        <div class="indicator-list">
+            <div class="indicator-item mandatory"><span>绿色发展规划和目标 X101</span><span class="badge-must">必选</span></div>
+            <div class="indicator-item mandatory"><span>绿色供应链管理体系 X102</span><span class="badge-must">必选</span></div>
+            <div class="indicator-item">机构、职责和资源 X103</div>
+            <div class="indicator-item">持续改进 X104</div>
+        </div>
+
+        <div class="indicator-header"><i class="fas fa-pencil-ruler"></i> 2. 绿色设计</div>
+        <div class="indicator-list">
+            <div class="indicator-item">产品绿色设计 X201</div>
+            <div class="indicator-item">工艺绿色设计 X202</div>
+            <div class="indicator-item">包装绿色设计 X203</div>
+            <div class="indicator-item mandatory">重点管控物料清单 X204<span class="badge-must">必选</span></div>
+        </div>
+
+        <div class="indicator-header"><i class="fas fa-shopping-cart"></i> 3. 绿色采购</div>
+        <div class="indicator-list">
+            <div class="indicator-item mandatory">管理制度及标准 X301<span class="badge-must">必选</span></div>
+            <div class="indicator-item mandatory">绿色采购要求 X302<span class="badge-must">必选</span></div>
+            <div class="indicator-item">绿色供应商选择 X303</div>
+            <div class="indicator-item">供应商风险评估 X304</div>
+            <div class="indicator-item">供应商审核监督 X305</div>
+            <div class="indicator-item">供应商绩效评价 X306</div>
+            <div class="indicator-item">应急管理和响应 X307</div>
+            <div class="indicator-item">文件及信息管理 X308</div>
+            <div class="indicator-item">沟通与培训 X309</div>
+        </div>
+
+        <div class="indicator-header"><i class="fas fa-industry"></i> 4. 绿色生产</div>
+        <div class="indicator-list">
+            <div class="indicator-item mandatory">生产合规性 X401<span class="badge-must">必选</span></div>
+            <div class="indicator-item">重点管控物料管理 X402</div>
+            <div class="indicator-item">污染物排放 X403</div>
+            <div class="indicator-item">用能设备 X404</div>
+            <div class="indicator-item">用能和用水计量系统 X405</div>
+            <div class="indicator-item">单位产品综合能耗 X406</div>
+            <div class="indicator-item">用水量控制 X407</div>
+        </div>
+
+        <div class="indicator-header"><i class="fas fa-truck"></i> 5. 绿色物流</div>
+        <div class="indicator-list">
+            <div class="indicator-item">管理制度 X501</div>
+            <div class="indicator-item">物流方案 X502</div>
+            <div class="indicator-item">产品运输、储存要求 X503</div>
+            <div class="indicator-item">运输工具 X504</div>
+        </div>
+
+        <div class="indicator-header"><i class="fas fa-recycle"></i> 6. 回收利用及末端处置</div>
+        <div class="indicator-list">
+            <div class="indicator-item">回收体系 X601</div>
+            <div class="indicator-item">下游企业协同 X602</div>
+            <div class="indicator-item">无害化处理 X603</div>
+            <div class="indicator-item">回收利用绩效 X604</div>
+            <div class="indicator-item">回收利用标识 X605</div>
+        </div>
+
+        <div class="indicator-header"><i class="fas fa-database"></i> 7. 绿色信息管理及披露</div>
+        <div class="indicator-list">
+            <div class="indicator-item">绿色信息管理 X701</div>
+            <div class="indicator-item mandatory">绿色信息披露 X702<span class="badge-must">必选</span></div>
+        </div>
+        <hr>
+        <div class="info-block" style="background: #f6fef2; margin-top: 0.5rem;">
+            <i class="fas fa-chart-simple"></i> <strong>指标权重说明：</strong> 企业或评价方可依据行业特点设定各指标权重，定量指标（综合能耗、用水量、回收绩效等）需统一计算方法，定性指标需明确评价依据。
+        </div>
+    </div>
+
+    <!-- 评分方法 & 评价等级 -->
+    <div class="grid-2col">
+        <div class="card">
+            <div class="section-title"><i class="fas fa-calculator"></i> 评分计算方法</div>
+            <p><strong>总分值 = 100分</strong>（各项加权得分总和）<br>
+            必选指标必须全部符合要求，任一必选指标缺失或不符 → 直接判定“不合格（五级）”。</p>
+            <p>📐 综合得分 f = Σ(各指标得分×权重)。定量指标按实际绩效与基准对比打分；定性指标依据体系文件及运行证据判定。</p>
+            <div class="info-block" style="margin-top: 1rem; background: #faf5e6;">
+                <i class="fas fa-lightbulb"></i> 注：企业或行业可参考附录C权重案例（如战略10%、绿色设计15%、绿色采购30%、绿色生产15%、绿色物流10%、回收10%、信息管理10%等），合理分配。
+            </div>
+        </div>
+        <div class="card">
+            <div class="section-title"><i class="fas fa-medal"></i> 评价结论分级</div>
+            <table class="level-table">
+                <thead>
+                    <tr><th>等级</th><th>条件</th><th>结论</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>一级</td><td>必选符合 且 f ≥ 90</td><td rowspan="4" style="background:#e8f5e9;">✅ 合格</td></tr>
+                    <tr><td>二级</td><td>必选符合 且 80 ≤ f < 90</td></tr>
+                    <tr><td>三级</td><td>必选符合 且 70 ≤ f < 80</td></tr>
+                    <tr><td>四级</td><td>必选符合 且 60 ≤ f < 70</td></tr>
+                    <tr><td>五级</td><td>必选指标缺失/不符合 或 f < 60</td><td style="background:#ffe0e0;">❌ 不合格</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 0.8rem; font-size: 0.85rem;"><i class="fas fa-clipboard-list"></i> 评价结论需形成报告，并注明等级及改进建议。</p>
+        </div>
+    </div>
+
+    <!-- 评价流程（附录B图解） -->
+    <div class="card">
+        <div class="section-title"><i class="fas fa-project-diagram"></i> 评价流程（第三方评价典型流程）</div>
+        <div class="flow-steps">
+            <div class="step"><i class="fas fa-file-signature"></i><br>1. 申请评价<br><span style="font-size:0.7rem;">企业提交材料</span></div>
+            <div class="step"><i class="fas fa-search"></i><br>2. 评价前准备<br><span style="font-size:0.7rem;">文件评审/合规性调查</span></div>
+            <div class="step"><i class="fas fa-clipboard-check"></i><br>3. 现场评价<br><span style="font-size:0.7rem;">走访/查证/访谈</span></div>
+            <div class="step"><i class="fas fa-file-alt"></i><br>4. 技术评审<br><span style="font-size:0.7rem;">内部质量管控</span></div>
+            <div class="step"><i class="fas fa-print"></i><br>5. 出具报告<br><span style="font-size:0.7rem;">结论+改进建议</span></div>
+        </div>
+        <div class="info-block" style="background:#f0f8ec; margin-top: 0.5rem;">
+            <i class="fas fa-microphone-alt"></i> 评价组需具备绿色制造、环保、低碳、节能等综合能力；现场评价重点核查合规性、数据真实性、管理程序有效性，并抽样验证。
+        </div>
+    </div>
+
+    <!-- 评价报告 & 关键实践（案例摘录） -->
+    <div class="grid-2col">
+        <div class="card">
+            <div class="section-title"><i class="fas fa-file-pdf"></i> 评价报告核心内容</div>
+            <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                <li>企业产品/工艺简述及供应链绿色性指标</li>
+                <li>评价范围、数据来源、评价依据</li>
+                <li>指标选取、权重分值及计算过程</li>
+                <li>数据质量分析与证据链说明</li>
+                <li>评价结论（等级、得分）、问题风险及改进建议</li>
+                <li>责任声明：第三方评价机构对报告真实性负责</li>
+            </ul>
+            <div class="info-block" style="margin-top: 1rem;">
+                <i class="fas fa-check-circle"></i> 报告需做到“内容精要、证据可信、判定准确”，支持供应链持续改进。
+            </div>
+        </div>
+        <div class="card">
+            <div class="section-title"><i class="fas fa-chalkboard-user"></i> 实践参考（电子企业案例亮点）</div>
+            <ul style="padding-left: 1.2rem;">
+                <li><strong>绿色采购：</strong> 供应商须通过RBA审核，要求ISO 14001/45001认证，高风险供应商两年一次EICC审核，季度环境绩效考评联动订单。</li>
+                <li><strong>供应商风险地图：</strong> 利用大数据监控供应商环境风险（PRTR平台、IPE数据），对高风险进行专项提升。</li>
+                <li><strong>绿色信息平台：</strong> MES系统追溯零部件身份二维码，绿色供应链地图实时获取排放数据、周边环境敏感信息。</li>
+                <li><strong>信息披露：</strong> 发布社会责任报告，95%采购额供应商披露CDP碳排放，重污染企业PRTR公开，官网公布产品拆解指南。</li>
+                <li><strong>回收利用：</strong> 鼓励老旧电子产品返还，建立逆向物流和拆解指南。</li>
+            </ul>
+            <p style="margin-top: 0.5rem; font-size:0.85rem; background:#fff5e0; padding:0.5rem; border-radius:0.8rem;"><i class="fas fa-chart-line"></i> 案例充分展示了从战略到信息披露的全链条闭环，为绿色供应链标杆提供参照。</p>
+        </div>
+    </div>
+
+    <!-- 补充重要细节: 绿色供应链定义及关键术语 -->
+    <div class="grid-3col">
+        <div class="info-block" style="background: white; border: 1px solid #cfe2cf;">
+            <h3><i class="fas fa-link"></i> 绿色供应链定义</h3>
+            <p>将环境保护和资源节约理念贯穿于产品设计、采购、生产、运输、储存、销售、使用和报废处理全过程，使经济活动与环境保护相协调的上下游关系。</p>
+        </div>
+        <div class="info-block" style="background: white; border: 1px solid #cfe2cf;">
+            <h3><i class="fas fa-chart-line"></i> 关键定量指标示例</h3>
+            <p>▪ 单位产品综合能耗（符合限额/行业平均）<br>▪ 单位产品用水量（满足取水定额）<br>▪ 污染物排放浓度/总量<br>▪ 产品回收利用率 / 实际回收绩效<br>▪ 重点管控物料使用减量</p>
+        </div>
+        <div class="info-block" style="background: white; border: 1px solid #cfe2cf;">
+            <h3><i class="fas fa-tasks"></i> 必选指标速查（缺一不可）</h3>
+            <p>✅ 绿色发展规划和目标 X101<br>✅ 绿色供应链管理体系 X102<br>✅ 重点管控物料清单 X204<br>✅ 绿色采购管理制度 X301 + 采购要求 X302<br>✅ 生产合规性 X401<br>✅ 绿色信息披露 X702</p>
+            <p style="margin-top: 0.5rem;">若任一必选指标未达标 → 直接不合格（五级）。</p>
+        </div>
+    </div>
+
+    <!-- 规范性引用说明 -->
+    <div class="card" style="background:#fefef7;">
+        <div class="section-title"><i class="fas fa-book-open"></i> 关联标准与参考文件</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem;">
+            <span>GB/T 33635-2017 绿色供应链管理导则</span>
+            <span>GB/T 39258 采购控制</span>
+            <span>GB/T 39259 物料清单要求</span>
+            <span>GB/T 39256 信息化平台规范</span>
+            <span>GB 17167 能源计量通则</span>
+            <span>GB 24789 水计量配备</span>
+            <span>ISO 14001 / ISO 45001 / ISO 50001等</span>
+        </div>
+        <hr>
+        <div class="footnote" style="text-align: left; margin-top: 0.5rem;">
+            <i class="fas fa-gavel"></i> 评价依据：本标准第4章企业基本要求（合规、信用、无重大事故）必须满足后方可进入评价流程。评价报告需充分体现现场核查、文件审核及数据追溯。
+        </div>
+    </div>
+
+    <!-- 结尾注解 -->
+    <div class="footnote">
+        🌱 图解基于 GB/T 39257-2020 编制，涵盖范围、指标、流程、等级与报告要求。制造企业可依据此规范完善绿色供应链体系，实现可持续发展目标。
+    </div>
+</div>
+</body>
+</html>

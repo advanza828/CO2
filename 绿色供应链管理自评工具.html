@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>绿色供应链管理评分工具 | GB/T 39257-2020</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eef5ea;
+            color: #1e2a2e;
+            padding: 2rem 1.5rem;
+        }
+        .tool-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #1e4a2f, #2d6a4f);
+            color: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .header p {
+            margin-top: 0.5rem;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        /* 结果卡片 */
+        .result-panel {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            border-left: 8px solid #2e7d32;
+        }
+        .score-box {
+            background: #f4fbf0;
+            border-radius: 1rem;
+            padding: 0.5rem 1.2rem;
+            text-align: center;
+        }
+        .score-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e562e;
+            line-height: 1;
+        }
+        .grade-badge {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: #2e7d32;
+            color: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 3rem;
+            display: inline-block;
+        }
+        .warning-mandatory {
+            background: #fff3e0;
+            border-left: 5px solid #e67e22;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+        }
+        button {
+            background: #2c6e3f;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        button:hover {
+            background: #1d5432;
+            transform: scale(0.98);
+        }
+        .weight-config {
+            background: #f9faf5;
+            padding: 1rem;
+            border-radius: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .weight-summary {
+            font-weight: 500;
+        }
+        /* 指标分组卡片 */
+        .indicator-group {
+            background: white;
+            border-radius: 1.25rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #ddecdd;
+            overflow: hidden;
+        }
+        .group-header {
+            background: #f1f8ee;
+            padding: 0.9rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            border-bottom: 1px solid #cfe1cf;
+        }
+        .group-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .weight-input {
+            width: 70px;
+            padding: 0.25rem 0.4rem;
+            border-radius: 1rem;
+            border: 1px solid #bdd8b0;
+            text-align: center;
+            font-weight: 600;
+        }
+        .indicator-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .indicator-table th, .indicator-table td {
+            padding: 0.7rem 0.8rem;
+            border-bottom: 1px solid #e6f0e4;
+            vertical-align: middle;
+        }
+        .indicator-table th {
+            text-align: left;
+            background: #fefef9;
+            font-weight: 600;
+            color: #2b5a3b;
+        }
+        .mandatory-tag {
+            background: #e67e22;
+            color: white;
+            font-size: 0.65rem;
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            margin-left: 0.5rem;
+            display: inline-block;
+        }
+        .score-input {
+            width: 75px;
+            padding: 0.4rem;
+            border-radius: 0.6rem;
+            border: 1px solid #cbdcc2;
+            text-align: center;
+        }
+        .comply-check {
+            transform: scale(1.1);
+            margin-right: 0.2rem;
+        }
+        .tooltip-icon {
+            color: #6f8f6b;
+            cursor: help;
+            margin-left: 5px;
+            font-size: 0.75rem;
+        }
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4c6a4b;
+        }
+        @media (max-width: 780px) {
+            .indicator-table th, .indicator-table td {
+                padding: 0.5rem;
+            }
+            .score-input {
+                width: 65px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="tool-container">
+    <div class="header">
+        <h1><i class="fas fa-leaf"></i> 绿色供应链管理 · 自评工具</h1>
+        <p>依据 GB/T 39257-2020 设计 | 制造企业绿色供应链管理评价 | 支持权重自定义 & 必选指标合规校验</p>
+    </div>
+
+    <div class="result-panel" id="resultPanel">
+        <div>
+            <strong>📊 综合评价得分</strong>
+            <div class="score-number" id="totalScore">--</div>
+        </div>
+        <div>
+            <strong>🏆 评价等级</strong>
+            <div><span class="grade-badge" id="gradeLevel">--</span></div>
+        </div>
+        <div>
+            <strong>✅ 必选指标状态</strong>
+            <div id="mandatoryStatus">检查中...</div>
+        </div>
+        <div>
+            <button id="resetBtn"><i class="fas fa-undo-alt"></i> 重置默认值</button>
+        </div>
+    </div>
+
+    <div class="weight-config">
+        <div><i class="fas fa-sliders-h"></i> <strong>一级指标权重（%）：</strong> 可手动调整，总和须为100%</div>
+        <div><span id="weightSumWarning" style="color:#c0392b; font-weight:500;"></span></div>
+        <button id="applyWeightsBtn">应用权重并重新计算</button>
+    </div>
+
+    <!-- 动态生成指标列表 -->
+    <div id="indicatorsContainer"></div>
+
+    <div class="footer-note">
+        <i class="fas fa-info-circle"></i> 使用方法：为每个二级指标打分(0-100)，必选指标需勾选“符合要求”方可参与合格评定。<br>
+        权重支持按一级指标自定义，总分100分制。若任一必选指标未勾选“符合”，则整体不合格（五级）。
+    </div>
+</div>
+
+<script>
+    // ======================= 定义指标体系 (基于GB/T 39257-2020 附录A) =======================
+    const indicatorsData = [
+        { id: "strat", name: "战略及目标", defaultWeight: 10, indicators: [
+            { name: "绿色发展规划和目标 X101", mandatory: true, desc: "将绿色发展战略纳入企业规划，制定3-5年供应链绿色提升目标", defaultScore: 80, comply: true },
+            { name: "绿色供应链管理体系 X102", mandatory: true, desc: "建立绿色供应链管理体系，统一协调管理程序", defaultScore: 80, comply: true },
+            { name: "机构、职责和资源 X103", mandatory: false, desc: "建立有效组织机构，提供必要资源", defaultScore: 75, comply: true },
+            { name: "持续改进 X104", mandatory: false, desc: "持续改进管理体系，推动供应商改进", defaultScore: 75, comply: true }
+        ]},
+        { id: "design", name: "绿色设计", defaultWeight: 15, indicators: [
+            { name: "产品绿色设计 X201", mandatory: false, desc: "产品绿色设计或改进，满足绿色性要求", defaultScore: 75, comply: true },
+            { name: "工艺绿色设计 X202", mandatory: false, desc: "工艺绿色属性识别、优化改进", defaultScore: 70, comply: true },
+            { name: "包装绿色设计 X203", mandatory: false, desc: "减量化、可回收、可降解设计", defaultScore: 70, comply: true },
+            { name: "重点管控物料清单 X204", mandatory: true, desc: "识别重点管控物料，建立清单并满足法规要求", defaultScore: 80, comply: true }
+        ]},
+        { id: "purchase", name: "绿色采购", defaultWeight: 30, indicators: [
+            { name: "管理制度及标准 X301", mandatory: true, desc: "制定绿色供应商选择、评估管理程序", defaultScore: 80, comply: true },
+            { name: "绿色采购要求 X302", mandatory: true, desc: "明确产品/服务绿色采购要求并落实", defaultScore: 80, comply: true },
+            { name: "绿色供应商选择 X303", mandatory: false, desc: "准入条件、资格认证", defaultScore: 75, comply: true },
+            { name: "供应商风险评估 X304", mandatory: false, desc: "风险评估与分类管理", defaultScore: 70, comply: true },
+            { name: "供应商审核监督 X305", mandatory: false, desc: "定期审核、推动改进", defaultScore: 70, comply: true },
+            { name: "供应商绩效评价 X306", mandatory: false, desc: "定期绩效评价，与采购联动", defaultScore: 70, comply: true },
+            { name: "应急管理和响应 X307", mandatory: false, desc: "供应商应急预案，异常应对", defaultScore: 65, comply: true },
+            { name: "文件及信息管理 X308", mandatory: false, desc: "采购过程记录可追溯", defaultScore: 75, comply: true },
+            { name: "沟通与培训 X309", mandatory: false, desc: "绿色采购要求传递与培训", defaultScore: 70, comply: true }
+        ]},
+        { id: "production", name: "绿色生产", defaultWeight: 15, indicators: [
+            { name: "生产合规性 X401", mandatory: true, desc: "生产经营符合环保、节能法规", defaultScore: 85, comply: true },
+            { name: "重点管控物料管理 X402", mandatory: false, desc: "生产过程重点物料有效管控", defaultScore: 75, comply: true },
+            { name: "污染物排放 X403", mandatory: false, desc: "废气/废水/固废达标排放", defaultScore: 75, comply: true },
+            { name: "用能设备 X404", mandatory: false, desc: "不使用淘汰设备，节能设备应用", defaultScore: 70, comply: true },
+            { name: "用能和用水计量系统 X405", mandatory: false, desc: "健全计量系统，定期分析", defaultScore: 70, comply: true },
+            { name: "单位产品综合能耗 X406", mandatory: false, desc: "符合限额或行业平均水平", defaultScore: 70, comply: true },
+            { name: "用水量控制 X407", mandatory: false, desc: "满足取水定额要求", defaultScore: 70, comply: true }
+        ]},
+        { id: "logistics", name: "绿色物流", defaultWeight: 10, indicators: [
+            { name: "管理制度 X501", mandatory: false, desc: "内外部物流符合绿色要求", defaultScore: 70, comply: true },
+            { name: "物流方案 X502", mandatory: false, desc: "优化方案，降低能耗排放", defaultScore: 70, comply: true },
+            { name: "产品运输、储存要求 X503", mandatory: false, desc: "防止泄漏，保证完整性", defaultScore: 70, comply: true },
+            { name: "运输工具 X504", mandatory: false, desc: "定期检查安全状况，防止泄漏", defaultScore: 70, comply: true }
+        ]},
+        { id: "recycle", name: "回收利用及末端处置", defaultWeight: 10, indicators: [
+            { name: "回收体系 X601", mandatory: false, desc: "识别回收可能性，建立生产者责任延伸", defaultScore: 70, comply: true },
+            { name: "下游企业协同 X602", mandatory: false, desc: "指导下游回收拆解，防止二次污染", defaultScore: 65, comply: true },
+            { name: "无害化处理 X603", mandatory: false, desc: "危险废弃物交由有资质单位处理", defaultScore: 75, comply: true },
+            { name: "回收利用绩效 X604", mandatory: false, desc: "统计回收利用率、材料利用率", defaultScore: 65, comply: true },
+            { name: "回收利用标识 X605", mandatory: false, desc: "对可回收产品/包装进行标识", defaultScore: 70, comply: true }
+        ]},
+        { id: "info", name: "绿色信息管理及披露", defaultWeight: 10, indicators: [
+            { name: "绿色信息管理 X701", mandatory: false, desc: "规范管理绿色信息，建立信息平台", defaultScore: 75, comply: true },
+            { name: "绿色信息披露 X702", mandatory: true, desc: "披露绿色战略、环境排放、产品拆解等信息", defaultScore: 80, comply: true }
+        ]}
+    ];
+
+    // 存储当前评分状态: weights, 每个指标的得分及必选符合状态
+    let currentWeights = {};      // { groupId: weight }
+    let scores = {};              // 存储每个指标的唯一key -> score (0-100)
+    let mandatoryComply = {};     // 存储每个必选指标的唯一key -> true/false
+
+    // 生成唯一键
+    function getKey(groupId, idx) {
+        return `${groupId}_${idx}`;
+    }
+
+    // 初始化数据结构
+    function initData() {
+        indicatorsData.forEach(group => {
+            currentWeights[group.id] = group.defaultWeight;
+            group.indicators.forEach((ind, idx) => {
+                const key = getKey(group.id, idx);
+                scores[key] = ind.defaultScore;
+                if (ind.mandatory) {
+                    mandatoryComply[key] = ind.comply !== undefined ? ind.comply : true;
+                }
+            });
+        });
+    }
+
+    // 渲染整个界面
+    function render() {
+        const container = document.getElementById('indicatorsContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        // 同时展示权重配置栏的权重总和警告
+        updateWeightWarning();
+
+        indicatorsData.forEach(group => {
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'indicator-group';
+            // 头部
+            const header = document.createElement('div');
+            header.className = 'group-header';
+            header.innerHTML = `
+                <div class="group-header-left">
+                    <i class="fas fa-chart-line"></i> ${group.name}
+                    <span style="font-size:0.8rem; background:#e0f0da; padding:0.2rem 0.6rem; border-radius:1rem;">权重 <input type="number" class="weight-input" data-group="${group.id}" value="${currentWeights[group.id]}" step="1" min="0" max="100"> %</span>
+                </div>
+                <div style="font-size:0.75rem; color:#3a6741;"><i class="fas fa-calculator"></i> 组内二级指标等权计分</div>
+            `;
+            // 表格
+            const table = document.createElement('table');
+            table.className = 'indicator-table';
+            table.innerHTML = `<thead><tr><th style="width:45%">二级指标</th><th style="width:15%">必选性</th><th style="width:20%">得分(0-100)</th><th style="width:20%">符合要求(仅必选)</th></tr></thead><tbody></tbody>`;
+            const tbody = table.querySelector('tbody');
+            group.indicators.forEach((ind, idx) => {
+                const key = getKey(group.id, idx);
+                const currentScore = scores[key];
+                const isMandatory = ind.mandatory;
+                const complyStatus = isMandatory ? (mandatoryComply[key] === true) : true;
+                const row = tbody.insertRow();
+                // 指标名 + 提示
+                const nameCell = row.insertCell(0);
+                nameCell.innerHTML = `<span>${ind.name}</span><i class="fas fa-question-circle tooltip-icon" title="${ind.desc}"></i>`;
+                // 必选标签
+                const mandatoryCell = row.insertCell(1);
+                if (isMandatory) {
+                    mandatoryCell.innerHTML = `<span class="mandatory-tag">必选</span>`;
+                } else {
+                    mandatoryCell.innerHTML = `<span style="color:#6c8c68;">可选</span>`;
+                }
+                // 得分输入
+                const scoreCell = row.insertCell(2);
+                const scoreInput = document.createElement('input');
+                scoreInput.type = 'number';
+                scoreInput.className = 'score-input';
+                scoreInput.value = currentScore;
+                scoreInput.min = 0;
+                scoreInput.max = 100;
+                scoreInput.step = 1;
+                scoreInput.addEventListener('change', (e) => {
+                    let newVal = parseInt(e.target.value);
+                    if (isNaN(newVal)) newVal = 0;
+                    newVal = Math.min(100, Math.max(0, newVal));
+                    scores[key] = newVal;
+                    updateTotalResult();
+                });
+                scoreCell.appendChild(scoreInput);
+                // 符合要求复选框 (仅必选)
+                const complyCell = row.insertCell(3);
+                if (isMandatory) {
+                    const checkBox = document.createElement('input');
+                    checkBox.type = 'checkbox';
+                    checkBox.className = 'comply-check';
+                    checkBox.checked = complyStatus;
+                    checkBox.addEventListener('change', (e) => {
+                        mandatoryComply[key] = e.target.checked;
+                        updateTotalResult();
+                    });
+                    complyCell.appendChild(checkBox);
+                    complyCell.appendChild(document.createTextNode(' 符合要求'));
+                } else {
+                    complyCell.innerHTML = '—';
+                }
+            });
+            groupDiv.appendChild(header);
+            groupDiv.appendChild(table);
+            container.appendChild(groupDiv);
+        });
+
+        // 绑定权重输入变化事件
+        document.querySelectorAll('.weight-input').forEach(inp => {
+            inp.removeEventListener('change', handleWeightChange);
+            inp.addEventListener('change', handleWeightChange);
+        });
+        // 绑定全局权重应用按钮
+        const applyBtn = document.getElementById('applyWeightsBtn');
+        if (applyBtn) {
+            applyBtn.onclick = () => {
+                // 重新收集权重
+                document.querySelectorAll('.weight-input').forEach(inp => {
+                    const groupId = inp.getAttribute('data-group');
+                    let val = parseFloat(inp.value);
+                    if (isNaN(val)) val = 0;
+                    val = Math.min(100, Math.max(0, val));
+                    currentWeights[groupId] = val;
+                });
+                // 检查权重和
+                const totalWeight = Object.values(currentWeights).reduce((a,b)=>a+b,0);
+                if (Math.abs(totalWeight - 100) > 0.01) {
+                    alert(`一级指标权重总和为 ${totalWeight}%，必须为100%。请调整后重新应用。`);
+                    return;
+                }
+                updateTotalResult();
+                render(); // 重新渲染确保显示最新权重数值
+            };
+        }
+
+        updateTotalResult();
+    }
+
+    function handleWeightChange(e) {
+        const inp = e.target;
+        const groupId = inp.getAttribute('data-group');
+        let val = parseFloat(inp.value);
+        if (isNaN(val)) val = 0;
+        val = Math.min(100, Math.max(0, val));
+        currentWeights[groupId] = val;
+        updateWeightWarning();
+        // 不自动重新计算总分，等待用户点击应用按钮
+    }
+
+    function updateWeightWarning() {
+        const total = Object.values(currentWeights).reduce((a,b)=>a+b,0);
+        const warningSpan = document.getElementById('weightSumWarning');
+        if (Math.abs(total - 100) > 0.01) {
+            warningSpan.innerHTML = `⚠️ 权重总和 ${total}%，必须等于100%才能正确评分。`;
+        } else {
+            warningSpan.innerHTML = `✓ 权重总和 ${total}% (符合要求)`;
+        }
+    }
+
+    // 计算总分和等级
+    function computeScoreAndGrade() {
+        // 1. 检查所有必选指标是否符合
+        let allMandatoryOk = true;
+        let missingMandatoryList = [];
+        for (let group of indicatorsData) {
+            group.indicators.forEach((ind, idx) => {
+                if (ind.mandatory) {
+                    const key = getKey(group.id, idx);
+                    const isComply = mandatoryComply[key] === true;
+                    if (!isComply) {
+                        allMandatoryOk = false;
+                        missingMandatoryList.push(ind.name);
+                    }
+                }
+            });
+        }
+        if (!allMandatoryOk) {
+            return { totalScore: null, grade: '五级（不合格）', mandatoryPass: false, missingList: missingMandatoryList };
+        }
+        // 2. 检查权重总和是否为100 (若不为100给出警告但仍按实际权重计算？为了准确，提醒用户但计算按比例?)
+        let totalWeight = Object.values(currentWeights).reduce((a,b)=>a+b,0);
+        let effectiveWeights = { ...currentWeights };
+        if (Math.abs(totalWeight - 100) > 0.01) {
+            // 权重和不为100，按比例归一化处理（避免计算错误）
+            if (totalWeight > 0) {
+                for (let g in effectiveWeights) {
+                    effectiveWeights[g] = (effectiveWeights[g] / totalWeight) * 100;
+                }
+            } else {
+                return { totalScore: 0, grade: '五级（不合格）', mandatoryPass: true, missingList: [] };
+            }
+        }
+
+        let totalScore = 0;
+        for (let group of indicatorsData) {
+            const groupWeight = effectiveWeights[group.id];
+            if (groupWeight === undefined || groupWeight === 0) continue;
+            let groupScoreSum = 0;
+            let count = 0;
+            for (let idx = 0; idx < group.indicators.length; idx++) {
+                const key = getKey(group.id, idx);
+                const scoreVal = scores[key] !== undefined ? scores[key] : 0;
+                groupScoreSum += scoreVal;
+                count++;
+            }
+            const avgGroupScore = count > 0 ? groupScoreSum / count : 0;
+            totalScore += (avgGroupScore * groupWeight / 100);
+        }
+        totalScore = Math.min(100, Math.max(0, totalScore));
+        let grade = '';
+        if (totalScore >= 90) grade = '一级（优秀）';
+        else if (totalScore >= 80) grade = '二级（良好）';
+        else if (totalScore >= 70) grade = '三级（中等）';
+        else if (totalScore >= 60) grade = '四级（合格）';
+        else grade = '五级（不合格）';
+        return { totalScore: totalScore.toFixed(1), grade, mandatoryPass: true, missingList: [] };
+    }
+
+    function updateTotalResult() {
+        const result = computeScoreAndGrade();
+        const totalSpan = document.getElementById('totalScore');
+        const gradeSpan = document.getElementById('gradeLevel');
+        const mandatoryStatusSpan = document.getElementById('mandatoryStatus');
+        if (result.mandatoryPass === false) {
+            totalSpan.innerText = '不合格';
+            gradeSpan.innerText = '五级（不合格）';
+            gradeSpan.style.background = '#a03e2c';
+            mandatoryStatusSpan.innerHTML = `❌ 必选指标未通过: ${result.missingList.join('、')}<br>请确保所有必选指标勾选“符合要求”`;
+            mandatoryStatusSpan.style.color = '#c0392b';
+        } else {
+            totalSpan.innerText = result.totalScore;
+            gradeSpan.innerText = result.grade;
+            gradeSpan.style.background = result.grade.startsWith('一级') ? '#1f8a4c' : (result.grade.startsWith('二级') ? '#2c7a47' : (result.grade.startsWith('三级') ? '#e68a2e' : '#bd6b2a'));
+            mandatoryStatusSpan.innerHTML = `✅ 所有必选指标均已符合要求`;
+            mandatoryStatusSpan.style.color = '#2e7d32';
+        }
+        // 如果权重和不为100，额外显示提醒
+        const totalWeight = Object.values(currentWeights).reduce((a,b)=>a+b,0);
+        if (Math.abs(totalWeight - 100) > 0.01 && result.mandatoryPass) {
+            mandatoryStatusSpan.innerHTML += `<span style="display:block; font-size:0.7rem; color:#c97e00;">⚠️ 当前一级指标权重总和 ${totalWeight}%，已自动归一化处理，建议调整至100%后重新应用。</span>`;
+        }
+    }
+
+    // 重置所有指标默认得分及必选符合
+    function resetToDefault() {
+        indicatorsData.forEach(group => {
+            currentWeights[group.id] = group.defaultWeight;
+            group.indicators.forEach((ind, idx) => {
+                const key = getKey(group.id, idx);
+                scores[key] = ind.defaultScore;
+                if (ind.mandatory) {
+                    mandatoryComply[key] = ind.comply !== undefined ? ind.comply : true;
+                }
+            });
+        });
+        // 重新渲染界面
+        render();
+    }
+
+    // 页面加载
+    initData();
+    render();
+    document.getElementById('resetBtn')?.addEventListener('click', () => {
+        resetToDefault();
+    });
+</script>
+</body>
+</html>
