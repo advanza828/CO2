@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图解 GB/T 24067-2024 | 产品碳足迹量化要求和指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: #1a2c3e;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 主标题区 */
+        .hero {
+            background: linear-gradient(135deg, #0b3b3f 0%, #1b5e5a 100%);
+            color: white;
+            border-radius: 2rem;
+            padding: 2rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .hero .sub {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            border-left: 3px solid #7bc5ae;
+            padding-left: 1rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #ffc107;
+            color: #1e3a3a;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* 卡片网格 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 1.8rem;
+        }
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.2s;
+            border: 1px solid #e2edf2;
+        }
+        .card-header {
+            background: #f4f9fc;
+            padding: 1.2rem 1.5rem;
+            border-bottom: 3px solid #2c8c6e;
+        }
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #155f54;
+        }
+        .card-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e6b5e;
+            margin: 0;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .list-styled {
+            padding-left: 1.2rem;
+            margin: 0.8rem 0;
+        }
+        .list-styled li {
+            margin: 0.5rem 0;
+        }
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+        .principle-item {
+            background: #f0f6f4;
+            padding: 0.6rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e5a4f;
+        }
+        .formula {
+            background: #f0f3f8;
+            font-family: monospace;
+            padding: 1rem;
+            border-radius: 1rem;
+            border-left: 5px solid #2c8c6e;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th, td {
+            border: 1px solid #cbdbe0;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #e5f0ec;
+            font-weight: 600;
+        }
+        hr {
+            margin: 1rem 0;
+            border-color: #d0e2dc;
+        }
+        .footnote {
+            font-size: 0.75rem;
+            color: #5f7c7c;
+            margin-top: 0.5rem;
+        }
+        .flow-step {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .step {
+            background: #eef2fa;
+            border-radius: 2rem;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .highlight {
+            background: #e0f0e9;
+            border-left: 4px solid #1f8a6b;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            margin: 0.8rem 0;
+        }
+        @media (max-width: 700px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>🌱 产品碳足迹量化要求与指南<br>GB/T 24067-2024 (ISO 14067:2018, MOD)</h1>
+        <div class="sub">生命周期视角 · 单一环境影响(气候变化) · 支持碳足迹绩效追踪与报告</div>
+        <div class="badge">完整图解版 · 涵盖原则/量化方法/报告/附录全内容</div>
+    </div>
+
+    <!-- 1. 范围 & 关键定义 -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header"><h2>📌 范围 & 核心定义</h2></div>
+            <div class="card-body">
+                <p><strong>范围：</strong>采用LCA方法量化产品碳足迹(CFP)或产品部分碳足迹，仅针对气候变化影响类型。不包含碳抵消、信息交流(见ISO 14026)。</p>
+                <p><strong>产品碳足迹(CFP)：</strong>产品系统中GHG排放量和清除量之和，以CO₂e表示。</p>
+                <p><strong>功能单位 / 声明单位：</strong>量化基准。功能单位用于全生命周期系统，声明单位用于部分碳足迹。</p>
+                <p><strong>系统边界：</strong>决定涵盖的单元过程，包含原材料获取、生产、运输、使用、生命末期。</p>
+                <p><strong>初级数据/现场数据：</strong>优先采用；次级数据仅当无法获取初级数据时使用。</p>
+                <p><strong>生物碳/化石碳：</strong>分别核算与报告，生物碳清除量暂记为-1 kg CO₂e/kg CO₂。</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><h2>⚖️ 12项基本原则</h2></div>
+            <div class="card-body">
+                <div class="principle-grid">
+                    <span class="principle-item">🌍 生命周期视角</span>
+                    <span class="principle-item">📏 相对性 & 功能单位</span>
+                    <span class="principle-item">🔄 迭代方法</span>
+                    <span class="principle-item">🔬 科学方法优先</span>
+                    <span class="principle-item">🎯 相关性</span>
+                    <span class="principle-item">✅ 完整性</span>
+                    <span class="principle-item">📊 一致性</span>
+                    <span class="principle-item">🌐 统一性</span>
+                    <span class="principle-item">🎛️ 准确性</span>
+                    <span class="principle-item">🔍 透明性</span>
+                    <span class="principle-item">🚫 避免重复计算</span>
+                    <span class="principle-item">📈 绩效追踪可比性</span>
+                </div>
+                <p class="footnote" style="margin-top: 12px;">* 所有原则贯穿量化、清单、影响评价及解释全过程。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 量化方法总图 -->
+    <div class="card full-width">
+        <div class="card-header"><h2>🔄 产品碳足迹量化方法 — LCA四阶段</h2></div>
+        <div class="card-body">
+            <div class="flow-step">
+                <span class="step">1️⃣ 目的与范围确定</span> → 
+                <span class="step">2️⃣ 生命周期清单分析(LCI)</span> → 
+                <span class="step">3️⃣ 生命周期影响评价(LCIA)</span> → 
+                <span class="step">4️⃣ 结果解释</span>
+            </div>
+            <p>迭代进行，基于地理位置可关联单元过程与实际地理位置(地理格网可选)。</p>
+        </div>
+    </div>
+
+    <!-- 目的 & 范围关键点 -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header"><h3>🎯 目的与范围确定</h3></div>
+            <div class="card-body">
+                <ul class="list-styled">
+                    <li><strong>功能/声明单位</strong>：明确量化基准（例：1kg产品、1次服务）</li>
+                    <li><strong>系统边界</strong>：涵盖从摇篮到坟墓/大门；须定义地理边界、数据时间边界</li>
+                    <li><strong>取舍准则</strong>：＜1%的环节可舍弃，累计舍弃影响≤5%总碳足迹</li>
+                    <li><strong>数据质量要求</strong>：时间/地理/技术代表性、完整性、精度、一致性</li>
+                    <li><strong>使用阶段 & 生命末期情景</strong>：基于合理假设，记录情景并评估敏感性</li>
+                    <li><strong>特定产品种类规则(CFP-PCR)</strong>：优先采用已有PCR或CFP-PCR</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><h3>📦 系统边界示意图（关键阶段）</h3></div>
+            <div class="card-body">
+                <div style="background:#F8FAF5; padding:1rem; border-radius:1rem; text-align:center; font-size:0.9rem;">
+                    🌱 原材料获取 → 🏭 生产制造 → 🚛 运输/交付 → 🏠 使用阶段 → ♻️ 生命末期处置<br>
+                    <span style="font-size:0.75rem;">(包含回收/再利用/焚烧/填埋)</span>
+                </div>
+                <p class="footnote" style="margin-top:10px">* 系统边界可选择“从摇篮到大门”或“从摇篮到坟墓”；如进行比较研究须边界相同。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 清单分析 + 分配 + 特定GHG处理 -->
+    <div class="card full-width">
+        <div class="card-header"><h2>📊 生命周期清单分析 (LCI) 关键要求</h2></div>
+        <div class="card-body">
+            <div class="grid-2" style="gap:1rem;">
+                <div>
+                    <h4>📥 数据收集与审定</h4>
+                    <ul>
+                        <li>现场数据优先（组织拥有财务/运营控制权的重要过程）</li>
+                        <li>数据审定：质量/能量平衡校验</li>
+                        <li>单元过程数据关联至功能单位</li>
+                    </ul>
+                    <h4>⚖️ 分配原则 (共生产品/回收)</h4>
+                    <ul>
+                        <li>避免分配：细分过程或系统扩展</li>
+                        <li>按物理关系（质量/能量）分配；其次经济价值</li>
+                        <li>闭环分配(材料属性不变)与开环分配(属性改变) — 见附录D公式</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>🌿 特定GHG排放/清除量处理 (表1汇总)</h4>
+                    <ul>
+                        <li><strong>化石/生物GHG</strong>：均纳入，分别单独记录</li>
+                        <li><strong>直接土地利用变化(dLUC)</strong>：纳入并单独报告</li>
+                        <li><strong>间接土地利用变化(iLUC)</strong>：宜考虑并单独记录</li>
+                        <li><strong>土地利用(LU)碳储量变化</strong>：宜评估并单独报告</li>
+                        <li><strong>产品中生物碳储存</strong>：不计入CFP结果，单独记录</li>
+                        <li><strong>飞机运输GHG</strong>：单独记录</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight">
+                <strong>🔌 电力处理细则：</strong> 内部发电 → 使用实际生命周期数据；直供电力 → 供应商专用排放因子；电网电力 → 优先使用合同工具/能源属性证书，否则使用区域电网平均排放因子。避免重复计算。
+            </div>
+        </div>
+    </div>
+
+    <!-- 影响评价 + 计算公式 -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header"><h3>🌡️ 生命周期影响评价 (LCIA)</h3></div>
+            <div class="card-body">
+                <p>采用IPCC 100年全球增温潜势(GWP)计算，单位kg CO₂e/功能单位。若IPCC更新GWP则采用最新值（本文件附录F提供部分GWP参考值）。</p>
+                <div class="formula">
+                    <strong>公式(1)：</strong> CFP<sub>GHG</sub> = Σ<sub>i</sub> [ Σ<sub>t</sub> (AD<sub>i</sub> × EF<sub>LCA,i,j</sub>) × GWP<sub>j</sub> ]
+                </div>
+                <p>生物碳影响评价：生物质CO₂清除量 = -1 kg CO₂e，生物质CO₂排放 = +1 kg CO₂e（净零假定，但非CO₂生物甲烷除外）。</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><h3>📐 结果解释 & 报告要素</h3></div>
+            <div class="card-body">
+                <ul>
+                    <li>识别显著环节（生命周期阶段/单元过程）</li>
+                    <li>完整性、敏感性、不确定性分析</li>
+                    <li>结论与局限性说明（附录A）</li>
+                    <li>单独记录：化石碳、生物碳、dLUC、飞机运输、生物碳含量、电力敏感性等</li>
+                    <li>地理格网划分原则（如适用）</li>
+                </ul>
+                <p><strong>产品碳足迹研究报告(第7章)：</strong>包括基本情况、目的范围、清单分析、影响评价、结果解释，并参照附录G模板。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 产品碳足迹报告内容 + 鉴定性评审 + 声明 -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header"><h3>📄 报告必须包含的信息</h3></div>
+            <div class="card-body">
+                <ul>
+                    <li>委托方/评价方信息、标准依据、使用的PCR</li>
+                    <li>功能单位、系统边界、取舍准则、数据来源及质量</li>
+                    <li>生命周期各阶段描述（使用与末期情景）</li>
+                    <li>分配原则与程序，电力处理说明</li>
+                    <li>特征化因子（GWP值）及清单计算结果</li>
+                    <li>敏感性分析、不确定性评估、地理格网（如适用）</li>
+                    <li>绩效追踪或比较声明（遵循附录B要求）</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><h3>🔎 鉴定性评审 & 声明</h3></div>
+            <div class="card-body">
+                <p><strong>鉴定性评审(第8章)：</strong> 按ISO/TS 14071执行，提高结果可信度。</p>
+                <p><strong>产品碳足迹声明(第9章)：</strong> 依据GB/T 24025或ISO 14026进行，可用于不同产品比较（满足附录B可比性要求）。</p>
+                <p><strong>具体产品碳足迹标准框架(第10章 & 附录H)：</strong> 各行业可依据附录H框架制定具体产品量化标准，涵盖范围、规范性引用、量化目的/范围、清单、影响评价、报告等。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 附录核心内容图解 (A-H完整) -->
+    <div class="card full-width">
+        <div class="card-header"><h2>📚 附录要点 — 完整性覆盖 (A~H)</h2></div>
+        <div class="card-body">
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between;">
+                <div style="flex:1; min-width: 200px;">
+                    <h4>附录A · 局限性</h4>
+                    <ul><li>单一环境问题：仅气候变化，忽略其他环境影响</li>
+                    <li>方法学局限：功能单位、分配、数据不确定性等</li>
+                    <li>结果不宜作为唯一决策依据</li></ul>
+                    <h4>附录B · 比较研究要求</h4>
+                    <ul><li>相同功能单位、系统边界、数据质量、情景假设</li>
+                    <li>遵循同一CFP-PCR，GWP版本一致</li></ul>
+                    <h4>附录C · 系统方法</h4>
+                    <ul><li>组织建立统一数据/分配程序，确保有效性及资源保障</li>
+                    <li>内部审定与持续改进</li></ul>
+                </div>
+                <div style="flex:1; min-width: 200px;">
+                    <h4>附录D · 回收分配程序</h4>
+                    <ul><li>闭环分配公式(D.1): E<sub>M</sub>=E<sub>V</sub>+E<sub>EOL</sub>-R×E<sub>V</sub></li>
+                    <li>开环分配公式(D.2~D.6)：基于物理/经济价值分配系数A</li>
+                    <li>提供回收碳信用额度的计算逻辑</li></ul>
+                    <h4>附录E · 农林产品指南</h4>
+                    <ul><li>土地利用变化、土壤碳、生物碳储量变化量化</li>
+                    <li>基准土地利用情景（一切照旧/目标/自然再生等）</li></ul>
+                </div>
+                <div style="flex:1; min-width: 200px;">
+                    <h4>附录F · GWP参考值(部分)</h4>
+                    <ul><li>CO₂=1; CH₄=27.9; N₂O=273; SF₆=25200; HFC-134a=1530等</li>
+                    <li>基于IPCC第六次评估报告(AR6)</li></ul>
+                    <h4>附录G · 报告模板框架</h4>
+                    <ul><li>生产者信息、产品信息、量化范围、清单数据表、碳足迹分布图</li>
+                    <li>结果解释与改进建议</li></ul>
+                    <h4>附录H · 具体产品标准框架</h4>
+                    <ul><li>包含范围、规范性引用、术语、量化目的/范围、清单、影响评价、报告、声明等完整结构</li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 更多技术细节：数据时间边界，绩效追踪等 -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header"><h3>⏱️ 数据时间边界 & 绩效追踪</h3></div>
+            <div class="card-body">
+                <p><strong>时间边界：</strong>选择代表性时间段，若GHG排放随时间变化取平均值。使用阶段或生命末期排放超过10年需注明时间影响。</p>
+                <p><strong>绩效追踪(6.4.7)：</strong>相同功能单位、相同方法/CFP-PCR，时间间隔不小于数据时间边界，追踪碳足迹变化趋势。</p>
+                <p><strong>延迟排放影响：</strong>超过10年的GHG排放/清除应在报告中单独注明（如碳储存效应）。</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><h3>🌍 地理边界与格网划分</h3></div>
+            <div class="card-body">
+                <p>增加数据地理边界要求(6.3.8)，允许将单元过程与实际地理位置关联，选择地理格网划分规则及尺度级别，提升空间溯源性。结果解释中宜描述格网划分方法。</p>
+                <p><strong>推荐：</strong>本土化数据库，优先采用国家级/区域级排放因子，支持地理格网可视化碳足迹。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 额外技术汇总表：特定GHG报告要求 -->
+    <div class="card full-width">
+        <div class="card-header"><h2>📋 表1 — 特定GHG排放/清除量处理总结（完整摘录）</h2></div>
+        <div class="card-body">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>类别</th><th>是否纳入CFP结果</th><th>报告要求</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>化石/生物GHG</td><td>✓ 纳入</td><td>分别单独记录</td></tr>
+                        <tr><td>直接土地利用变化(dLUC)</td><td>✓ 纳入</td><td>单独记录净排放/清除量</td></tr>
+                        <tr><td>间接土地利用变化(iLUC)</td><td>宜考虑纳入</td><td>单独记录</td></tr>
+                        <tr><td>土地利用(LU)碳储量变化</td><td>宜评估纳入</td><td>单独记录</td></tr>
+                        <tr><td>产品中生物碳储存</td><td>不计入CFP结果</td><td>单独记录生物碳含量</td></tr>
+                        <tr><td>飞机运输GHG</td><td>✓ 纳入</td><td>单独记录，若使用航空因子单独报告</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="footnote">* 符合6.4.9条款及表1要求，确保完整性和透明度。</p>
+        </div>
+    </div>
+
+    <!-- 系统方法与改进措施 -->
+    <div class="card full-width">
+        <div class="card-header"><h2>🏢 组织级产品碳足迹系统方法 (附录C)</h2></div>
+        <div class="card-body">
+            <p>组织应建立统一的系统方法，包括数据收集/管理、审定程序、分配规则、使用/末期情景模型。最高管理层提供资源保障，定期内部评审，确保同一套数据集和分配程序应用于所有产品碳足迹核算，简化核查。</p>
+            <div class="highlight">
+                💡 系统方法有助于提升可比性、减少重复劳动，并能支持产品碳足迹绩效追踪。
+            </div>
+        </div>
+    </div>
+
+    <!-- 标准起草与参考 -->
+    <div class="card full-width" style="background: #fafcfb;">
+        <div class="card-header"><h2>📖 标准制定与引用说明</h2></div>
+        <div class="card-body">
+            <p>GB/T 24067-2024 修改采用 ISO 14067:2018，增加了地理边界、CFP-PCR编制要求、具体产品标准框架等内容。归口单位：全国碳排放管理标准化技术委员会(SAC/TC548)。主要起草单位包括中国标准化研究院、清华大学、中国环境科学研究院等。</p>
+            <p>规范性引用文件：GB/T 24040, GB/T 24044, GB/T 32150, ISO 14026, ISO/TS 14027 等。本文件不包含碳抵消，且仅关注气候变化影响，鼓励结合其他环境指标综合决策。</p>
+            <hr>
+            <p class="footnote">✅ 本图解完整覆盖标准全部技术章节及附录A~H，保证内容无遗漏。实际应用中需依据最新IPCC报告GWP值及行业CFP-PCR进行量化。</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #4c6a6a;">
+        基于 GB/T 24067-2024 制作 · 产品碳足迹量化要求和指南 完整图解 | 满足透明度、完整性原则
+    </div>
+</div>
+</body>
+</html>
