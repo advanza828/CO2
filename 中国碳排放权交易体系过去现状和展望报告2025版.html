@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>图解中国碳市场 | 全国碳排放权交易体系 · 2025展望</title>
+    <!-- Google Font & Chart.js CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f7f2;
+            color: #1a2e2c;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        /* 头部 */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1c6e43, #2b7a4b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .hero .sub {
+            color: #2c5e47;
+            font-size: 1rem;
+            border-top: 2px solid #b9dfc5;
+            display: inline-block;
+            padding-top: 0.6rem;
+            margin-top: 0.75rem;
+            font-weight: 500;
+        }
+        /* 关键指标卡片网格 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,32,16,0.06);
+            transition: all 0.2s;
+            border: 1px solid #d9ecd9;
+        }
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1b7e44;
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #2b5e42;
+            margin-top: 0.5rem;
+        }
+        .stat-desc {
+            font-size: 0.75rem;
+            color: #5a7c6c;
+            margin-top: 0.3rem;
+        }
+        /* 章节标题 */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2rem 0 1.2rem 0;
+            padding-left: 0.75rem;
+            border-left: 6px solid #2b8c5a;
+            color: #1c4d3a;
+        }
+        .timeline {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.8rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #ddebe0;
+        }
+        .timeline-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 1rem;
+        }
+        .timeline-node {
+            flex: 1;
+            min-width: 110px;
+            text-align: center;
+            padding: 0.5rem;
+            position: relative;
+        }
+        .timeline-year {
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: #e5f5e9;
+            display: inline-block;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            color: #146b3a;
+        }
+        .timeline-text {
+            font-size: 0.85rem;
+            margin-top: 0.6rem;
+            font-weight: 500;
+            color: #2b4d3e;
+        }
+        /* 双栏布局 体系 */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        .info-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #cfe3d6;
+            transition: transform 0.1s ease;
+        }
+        .info-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1e6a43;
+        }
+        .badge {
+            background: #cfe9dc;
+            border-radius: 40px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #146b3a;
+        }
+        .key-list {
+            list-style: none;
+            padding: 0;
+        }
+        .key-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        .key-list li::before {
+            content: "🌱";
+            position: absolute;
+            left: -0.2rem;
+            color: #2b8c5a;
+            font-size: 0.8rem;
+        }
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cfe3d6, transparent);
+        }
+        .chart-container {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .flex-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+        .pill {
+            background: #eef4ea;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5f8472;
+            border-top: 1px solid #cde0d4;
+            margin-top: 3rem;
+            padding-top: 2rem;
+        }
+        @media (max-width: 760px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .timeline-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+        .highlight {
+            background: #e0f2e6;
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            font-weight: 600;
+        }
+        .flow-symbol {
+            font-size: 0.8rem;
+            background: #eef4ea;
+            border-radius: 12px;
+            padding: 0.2rem 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部 -->
+    <div class="hero">
+        <h1>🌍 中国碳排放权交易体系</h1>
+        <div class="sub">过去 · 现状 · 展望 | 2025 图解报告</div>
+        <p style="max-width: 720px; margin: 1rem auto 0; color: #3b6b58;">全球覆盖排放量最大的碳市场 | 从试点到全国统一市场 | 电力+钢铁+水泥+铝冶炼 开启新阶段</p>
+    </div>
+
+    <!-- 关键指标卡片 -->
+    <div class="stats-grid">
+        <div class="stat-card"><div class="stat-number">≈80亿吨</div><div class="stat-label">年覆盖排放量</div><div class="stat-desc">占全国CO₂排放量60%以上</div></div>
+        <div class="stat-card"><div class="stat-number">~3,600家</div><div class="stat-label">重点排放单位</div><div class="stat-desc">电力 · 钢铁 · 水泥 · 铝冶炼</div></div>
+        <div class="stat-card"><div class="stat-number">97.49元/吨</div><div class="stat-label">2024年底碳价</div><div class="stat-desc">较启动初期上涨超60%</div></div>
+        <div class="stat-card"><div class="stat-number">430.33亿</div><div class="stat-label">累计成交额(截至2024)</div><div class="stat-desc">累计成交量6.3亿吨</div></div>
+        <div class="stat-card"><div class="stat-number">5%</div><div class="stat-label">CCER抵销上限</div><div class="stat-desc">全国碳市场与自愿减排市场衔接</div></div>
+    </div>
+
+    <!-- 发展历程 时间线 -->
+    <div class="timeline">
+        <h3 style="font-size:1.4rem; font-weight:700; margin-bottom:1rem;">📅 中国碳市场关键里程碑</h3>
+        <div class="timeline-grid">
+            <div class="timeline-node"><div class="timeline-year">2011-2013</div><div class="timeline-text">“两省五市”碳试点启动，地方碳市场探索</div></div>
+            <div class="timeline-node"><div class="timeline-year">2017.12</div><div class="timeline-text">《全国碳排放权交易市场建设方案》印发，正式启动建设</div></div>
+            <div class="timeline-node"><div class="timeline-year">2021.7</div><div class="timeline-text">全国碳市场上线交易，发电行业率先履约</div></div>
+            <div class="timeline-node"><div class="timeline-year">2024.2</div><div class="timeline-text">《碳排放权交易管理暂行条例》发布，最高层级法规</div></div>
+            <div class="timeline-node"><div class="timeline-year">2025.3</div><div class="timeline-text">扩围至钢铁、水泥、铝冶炼行业，覆盖~80亿吨排放</div></div>
+        </div>
+        <div style="background:#f5faf7; border-radius:20px; padding:0.8rem; margin-top:1rem; font-size:0.8rem; text-align:center;">
+            ✅ 已完成三个履约周期（2019-2020、2021-2022、2023） → 第四周期覆盖四个行业，2025年底前完成首次履约
+        </div>
+    </div>
+
+    <!-- 核心设计：制度框架 + 关键要素 -->
+    <div class="section-title">⚙️ 全国碳市场制度框架与关键设计</div>
+    <div class="two-col">
+        <div class="info-card">
+            <h3>📜 法律与法规体系</h3>
+            <ul class="key-list">
+                <li><span class="highlight">《碳排放权交易管理暂行条例》</span> (2024.5.1施行) — 最高行政法规</li>
+                <li>生态环境部《管理办法》及配额分配方案、核算指南等配套文件</li>
+                <li>明确监管主体、处罚力度（最高违法所得10倍罚款）</li>
+                <li>全国统一注册登记系统（武汉）+ 交易系统（上海）</li>
+            </ul>
+            <hr>
+            <h3>🎯 覆盖范围 & 总量设定</h3>
+            <ul class="key-list">
+                <li>行业：电力、钢铁、水泥、铝冶炼（2025扩围），未来将纳入石化、化工、造纸等</li>
+                <li>温室气体：CO₂为主，铝冶炼新增CF₄、C₂F₆</li>
+                <li>纳入门槛：年排放≥2.6万吨CO₂当量</li>
+                <li><strong>基于强度的总量设定</strong>（无绝对总量）→ 配额=基准值×实际产量，随产出浮动</li>
+                <li>第一个履约周期年均配额~45亿吨 → 第二周期~51亿吨 → 第三周期~52亿吨 → 扩围后覆盖80亿吨</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3>🎫 配额分配与MRV</h3>
+            <ul class="key-list">
+                <li>✅ 全部免费分配（未来将引入有偿拍卖）</li>
+                <li>发电行业：基准线法（4类机组），两步分配法：预分配70% + 事后调整</li>
+                <li>新纳入行业（钢铁/水泥/铝）：2024年配额等量分配，2025-2026基于强度控制，行业盈亏平衡</li>
+                <li><strong>MRV体系强化</strong>：月度存证+“国家-省-市”三级联审，严打数据造假</li>
+                <li>核查由政府购买服务，保证独立性</li>
+            </ul>
+            <hr>
+            <h3>💱 交易与履约机制</h3>
+            <ul class="key-list">
+                <li>交易方式：挂牌协议、大宗协议、单向竞价（±10% / ±30%涨跌幅）</li>
+                <li>仅限重点排放单位参与，目前现货市场（衍生品暂未开放）</li>
+                <li>履约：从两年一次改为每年履约，第三个周期起设置配额结转限制</li>
+                <li>灵活机制：燃气机组免履约缺口，燃煤机组缺口上限20%</li>
+                <li>处罚升级：未清缴配额处以5-10倍市场均价罚款</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 配额分配流程 + 市场结构图 -->
+    <div class="two-col" style="margin-top:-0.5rem;">
+        <div class="info-card">
+            <h3>🏭 配额分配流程图解（发电行业）</h3>
+            <div style="background:#f2faf4; border-radius: 1rem; padding: 1rem; font-size:0.85rem;">
+                <div>📌 基准值 × 实际发电/供热量 = 最终配额量</div>
+                <div style="display:flex; flex-wrap:wrap; justify-content:space-between; margin:0.8rem 0;">
+                    <span class="flow-symbol">①预分配</span> ➔ <span class="flow-symbol">70%上一年核查量</span> ➔ <span class="flow-symbol">②事后调整</span> ➔ <span class="flow-symbol">多退少补</span>
+                </div>
+                <div>🔥 2023-2024发电基准值示例：300MW以上常规煤电机组 0.7910 tCO₂/MWh，燃气机组 0.3288 tCO₂/MWh<br>
+                ➜ 配额逐步收紧，倒逼减排</div>
+            </div>
+        </div>
+        <div class="info-card">
+            <h3>🌿 全国碳市场体系双支柱</h3>
+            <div class="flex-badge">
+                <span class="pill">💨 强制碳市场 (ETS)</span>
+                <span class="pill">🌱 自愿减排市场 (CCER)</span>
+            </div>
+            <ul class="key-list">
+                <li><strong>CCER抵销机制</strong>：≤ 5%配额清缴，2024年新CCER机制重启，首批签发948万吨</li>
+                <li>已发布6个方法学：造林碳汇、海上风电、光热发电、低浓度瓦斯利用等</li>
+                <li>CCER与全国碳市场、地方试点联动，激励全社会减排</li>
+                <li>2025年1月起旧CCER不再用于全国市场履约，新体系全面接轨</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 市场表现：碳价走势图 + 交易量趋势 -->
+    <div class="section-title">📈 市场表现 & 碳价趋势</div>
+    <div class="chart-container">
+        <canvas id="carbonPriceChart" width="400" height="200" style="max-height:280px; width:100%"></canvas>
+        <div style="display:flex; justify-content:space-between; margin-top:0.5rem; flex-wrap:wrap; gap:0.5rem;">
+            <span class="badge">📊 2021第一履约周期：40-60元/吨</span>
+            <span class="badge">📈 2022-2023：升至50-82元/吨</span>
+            <span class="badge">🎯 2024年底收盘97.49元/吨</span>
+            <span class="badge">🔮 2030年预测接近300元/吨（约42美元）</span>
+        </div>
+        <p style="font-size:0.7rem; text-align:center; margin-top:0.8rem;">*价格基于CEA现货收盘价综合描述，数据来源：ICAP、生态环境部、中国碳价调查</p>
+    </div>
+
+    <!-- 地方试点经验与全国市场借鉴 -->
+    <div class="section-title">🏙️ 地方碳市场经验 → 全国市场创新</div>
+    <div class="two-col">
+        <div class="info-card">
+            <h3>🔍 8大地方试点成果</h3>
+            <ul class="key-list">
+                <li>深圳：控排企业碳强度较2013年下降49%，增加值增长62%</li>
+                <li>湖北、广东、上海等试点强度显著下降，累计减排千万吨级</li>
+                <li>创新碳金融：碳质押、配额回购、碳保险等先行先试</li>
+                <li>构建MRV能力、第三方核查管理体系，为全国市场铺路</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3>🚀 全国市场特色设计</h3>
+            <ul class="key-list">
+                <li>✔️ 基于强度的总量 + 基准线法，适应碳达峰前经济波动</li>
+                <li>✔️ “月度存证+三级联审”保障数据质量全球领先实践</li>
+                <li>✔️ 配额结转规则（净卖出量×1.5+1万吨）提升流动性</li>
+                <li>✔️ 循序渐进扩围：优先发电→2025纳入三大工业，涵盖非CO₂温室气体</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 未来展望 核心要点 -->
+    <div class="section-title">🔭 展望与中长期路线图</div>
+    <div class="info-card" style="background:#e2f0e8;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem;">
+            <div><span style="font-weight:800;">🎯 从强度控制向绝对总量过渡</span><br>2030年前逐步引入绝对总量，衔接“碳排放双控”目标</div>
+            <div><span style="font-weight:800;">💰 有偿分配与市场稳定机制</span><br>逐步引入配额拍卖，建立收入管理机制，支持低碳转型</div>
+            <div><span style="font-weight:800;">🏭 行业扩围持续深化</span><br>石化、化工、建材、造纸、民航等行业将分步纳入</div>
+            <div><span style="font-weight:800;">⚖️ 完善法律与金融衔接</span><br>加强碳市场与碳预算、碳足迹政策协同，探索期货等衍生品</div>
+        </div>
+        <hr>
+        <div class="flex-badge" style="justify-content:center;">
+            <span class="pill">《关于推进绿色低碳转型加强全国碳市场建设的意见》2025.5发布</span>
+            <span class="pill">2030年碳达峰后转向总量控制为主</span>
+        </div>
+        <p style="margin-top:1rem; font-size:0.85rem;">国际示范：中国碳市场为新兴经济体提供经验，通过市场机制实现低成本减排，推动绿色技术创新。</p>
+    </div>
+
+    <!-- 额外关键信息卡片：MRV升级、碳价传导 -->
+    <div class="two-col">
+        <div class="info-card">
+            <h3>📐 MRV 数据质量保障里程碑</h3>
+            <ul class="key-list">
+                <li>2022年起发电行业月度信息化存证，数据异常实时预警</li>
+                <li>《条例》大幅提升数据造假处罚：最高违法所得10倍罚款</li>
+                <li>核查机构不符合项同比减少35.7%，一次整改合格率升至92%</li>
+                <li>碳排放连续监测系统(CEMS)试点推进，未来技术融合</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3>🌏 国际接轨与自愿减排市场</h3>
+            <ul class="key-list">
+                <li>CCER机制获得国际民航组织CORSIA认可，未来或衔接《巴黎协定》第6条</li>
+                <li>新CCER注册登记机构（国家气候战略中心）＋交易机构（北京绿交所）</li>
+                <li>截至2025年6月，23个项目完成登记，减排量超900万吨</li>
+                <li>碳普惠机制探索：连接个人低碳行为与碳市场</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 三大新行业扩围影响 -->
+    <div class="info-card" style="background: white;">
+        <h3>🏗️ 2025关键扩围：钢铁、水泥、铝冶炼行业</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between;">
+            <div><span class="badge">🔩 钢铁行业</span><br>2025年1月发布核算与核查指南，2024年度为首个管控年度</div>
+            <div><span class="badge">🏭 水泥行业</span><br>工艺过程排放纳入管控，基准线逐步收紧</div>
+            <div><span class="badge">⚙️ 铝冶炼行业</span><br>首度管控非二氧化碳温室气体（CF₄/C₂F₆），全行业覆盖</div>
+        </div>
+        <p style="margin-top: 1rem; background: #eff7f2; border-radius: 20px; padding: 0.5rem 1rem; font-size: 0.85rem;">✨ 2024-2026为启动实施阶段，配额相对宽松；2027年后深化完善，配额总量适度收紧，免费配额比例下降。</p>
+    </div>
+
+    <!-- 参考与数据源 -->
+    <div class="footer-note">
+        📄 基于《中国碳排放权交易体系：过去、现状和展望报告（2025年版）》综合整理 | 数据来源：生态环境部、ICAP、全国碳市场信息平台、EDF等<br>
+        图解内容涵盖发展历程、制度设计、配额分配、市场表现及未来展望，确保关键信息准确呈现。
+    </div>
+</div>
+
+<script>
+    // 碳价趋势图 (基于报告描述和实际数据点)
+    const ctx = document.getElementById('carbonPriceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['2021.Q2', '2021年底', '2022年底', '2023年底', '2024年底', '2025(预测)', '2030(预测)'],
+            datasets: [{
+                label: 'CEA 收盘价 (元/吨)',
+                data: [48, 54, 70, 80, 97.5, 105, 280],
+                borderColor: '#1c7e54',
+                backgroundColor: 'rgba(35, 125, 75, 0.05)',
+                borderWidth: 3,
+                pointBackgroundColor: '#2e8b57',
+                pointBorderColor: '#ffffff',
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                tension: 0.2,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                tooltip: { callbacks: { label: (ctx) => `${ctx.raw} 元/吨` } },
+                legend: { position: 'top', labels: { font: { size: 12 } } },
+                title: { display: true, text: '全国碳市场碳价走势与展望', font: { size: 14, weight: 'bold' }, padding: { bottom: 15 } }
+            },
+            scales: {
+                y: { title: { display: true, text: '价格 (元/吨 CO₂)', color: '#2b6e47' }, grid: { color: '#deede3' } },
+                x: { title: { display: true, text: '时间', color: '#2b6e47' }, ticks: { font: { size: 10 } } }
+            }
+        }
+    });
+</script>
+<!-- 增加微交互说明: 流程图简介 -->
+</body>
+</html>
