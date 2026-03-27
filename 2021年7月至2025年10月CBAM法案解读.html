@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>碳边境调节机制CBAM法案完整图解(2023年7月-2025年10月)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f0f6fc;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+            color: #0a2c3d;
+            line-height: 1.45;
+            padding: 2rem 1.2rem;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2edf2;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .card-header {
+            background: #f9fafc;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid #e2edf2;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .card-header .icon {
+            font-size: 1.5rem;
+        }
+        .card-body {
+            padding: 1.5rem 1.8rem;
+        }
+        .section-title {
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #1e6f5c;
+            border-left: 4px solid #2c7da0;
+            padding-left: 0.8rem;
+            margin: 1.2rem 0 0.8rem 0;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .info-highlight {
+            background: #eef2fa;
+            border-radius: 1rem;
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .badge {
+            background: #eef2ff;
+            color: #1e4a76;
+            border-radius: 2rem;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .timeline-step {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .step-item {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 0.7rem 1rem;
+            border-radius: 1rem;
+            flex: 1;
+            min-width: 180px;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+        }
+        .compare-table th {
+            background: #e9f0f5;
+            padding: 0.6rem;
+            text-align: left;
+            border: 1px solid #cbdde9;
+        }
+        .compare-table td {
+            padding: 0.6rem;
+            border: 1px solid #dce5ec;
+            vertical-align: top;
+        }
+        .default-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        .default-table th {
+            background: #e9f0f5;
+            padding: 0.5rem;
+            border: 1px solid #cbdde9;
+            text-align: center;
+        }
+        .default-table td {
+            padding: 0.4rem;
+            border: 1px solid #dce5ec;
+            text-align: center;
+        }
+        .footnote {
+            background: #fef6e0;
+            border-left: 4px solid #f0b429;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+        }
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #e2edf2;
+        }
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            .compare-table, .default-table {
+                font-size: 0.7rem;
+            }
+        }
+        .list-styled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.3rem;
+            position: relative;
+        }
+        .list-styled li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #2c7da0;
+        }
+        .pill {
+            background: #e0f0f5;
+            border-radius: 1.5rem;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 总标题 -->
+    <div class="card" style="background: linear-gradient(105deg, #1a5d7a 0%, #0e3f57 100%); color: white; border: none;">
+        <div style="padding: 1.5rem 2rem;">
+            <div class="badge" style="background: #ffda7c; color:#1e3a3a;">2023年7月-2025年10月</div>
+            <h1 style="font-size: 1.8rem; margin: 0.5rem 0 0.2rem; font-weight: 700;">碳边境调节机制CBAM法案完整图解</h1>
+            <p style="font-size: 1rem; opacity: 0.9;">整合基础条例(EU)2023/956、过渡期实施条例、指导文件、问答备忘录、默认值及2025年简化条例(EU)2025/2083 · 按最新修订为准</p>
+            <div class="timeline-step" style="margin-top: 1rem;">
+                <div class="step-item" style="background: rgba(255,255,255,0.12); border-left-color:#ffcd7e; color:white;">📅 过渡期 2023.10.1 – 2025.12.31<br>仅报告义务</div>
+                <div class="step-item" style="background: rgba(255,255,255,0.12); border-left-color:#ffcd7e; color:white;">⚙️ 正式期 2026.1.1起<br>证书清缴+授权申报商</div>
+                <div class="step-item" style="background: rgba(255,255,255,0.12); border-left-color:#ffcd7e; color:white;">📌 2025简化条例强化微量豁免、调整申报期限</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. 法律框架与核心原则 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">⚖️</span> 法律框架与核心原则</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">🎯 目标</div>
+                    <ul class="list-styled">
+                        <li>防范碳泄漏，确保进口商品与欧盟产品碳价平等。</li>
+                        <li>支持欧盟2030年减排55%、2050年气候中和目标。</li>
+                        <li>逐步取代EU ETS免费配额（2034年完全取消）。</li>
+                    </ul>
+                    <div class="section-title">📜 法律基础</div>
+                    <ul class="list-styled">
+                        <li><strong>基础条例</strong>：(EU) 2023/956（2023.5.10）</li>
+                        <li><strong>过渡期实施条例</strong>：(EU) 2023/1773（报告与MRV细则）</li>
+                        <li><strong>最新修订</strong>：(EU) 2025/2083（2025.10.8，简化与加强）</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="section-title">🌍 覆盖行业（附件I）</div>
+                    <ul class="list-styled">
+                        <li>水泥、钢铁、铝、肥料、氢、电力</li>
+                        <li>非煅烧高岭土排除（2025修订）</li>
+                        <li>电力仅核算直接排放（列入附件II）</li>
+                    </ul>
+                    <div class="section-title">🏭 覆盖排放</div>
+                    <ul class="list-styled">
+                        <li><strong>直接排放</strong>：燃烧+过程+制热/制冷</li>
+                        <li><strong>间接排放</strong>：生产过程中消耗电力的排放（过渡期全报，正式期逐步纳入）</li>
+                        <li>上游物料（原料）的隐含碳排放（复杂商品）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. 关键机制：证书、价格、申报 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">💶</span> CBAM证书与财务机制（正式期）</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">📈 证书价格</div>
+                    <ul class="list-styled">
+                        <li>每周按EU ETS配额拍卖收盘均价计算（2026年证书采用进口季度均价）。</li>
+                        <li>2027年2月1日起通过中央平台出售。</li>
+                    </ul>
+                    <div class="section-title">📑 年度申报（Art.6修订）</div>
+                    <ul class="list-styled">
+                        <li><strong>截止日期</strong>：每年<strong>9月30日</strong>（原5月31日）</li>
+                        <li>首次申报2027年9月30日（针对2026年进口）</li>
+                        <li>申报内容：进口总量、嵌入排放（实际/默认）、证书清缴数、核查报告副本。</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="section-title">📦 季度持仓义务（Art.22修订）</div>
+                    <ul class="list-styled">
+                        <li>每季度末账户证书数量 ≥ <strong>50%</strong>（原80%）的当年累计嵌入排放。</li>
+                        <li>可参考上一年度申报值或使用默认值（不加乘）计算。</li>
+                        <li>纳入免费配额调整。</li>
+                    </ul>
+                    <div class="section-title">🔄 回购与注销</div>
+                    <ul class="list-styled">
+                        <li>回购申请截止：<strong>10月31日</strong>（原6月30日）</li>
+                        <li>证书注销：<strong>11月1日</strong>（原7月1日）</li>
+                        <li>回购数量上限为当年购买义务对应证书数。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. 微量豁免（新增核心简化） -->
+    <div class="card">
+        <div class="card-header"><span class="icon">🎯</span> 微量豁免（De Minimis）— 2025修订新增</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">✅ 适用条件</div>
+                    <ul class="list-styled">
+                        <li>同一进口商日历年累计净质量 ≤ <strong>50吨</strong>（钢铁、铝、水泥、肥料合计）</li>
+                        <li>电力与氢<strong>不适用</strong>该豁免。</li>
+                        <li>若超过阈值，全年所有进口（含阈值内部分）均须履行全部CBAM义务。</li>
+                        <li>报关单中声明豁免；间接海关代表仍需获得授权。</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="section-title">🔧 动态调整机制（附件VII）</div>
+                    <ul class="list-styled">
+                        <li>目标：豁免覆盖的嵌入排放 ≤ 总排放的<strong>1%</strong>（+0.25%安全边际）。</li>
+                        <li>欧委会每年评估，若计算阈值偏离现行值＞15吨，通过授权法案调整（四舍五入至十位）。</li>
+                        <li>规避行为（人为拆分）视为严重违规。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footnote">📌 超阈值未授权进口的处罚：按未清缴证书罚款（参照EU ETS）的3-5倍，但支付罚款后免除申报与证书清缴义务；若超阈值≤10%或过渡授权未决，可减轻处罚。</div>
+        </div>
+    </div>
+
+    <!-- 4. 过渡期 vs 正式期对比表 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">⏳</span> 过渡期与正式期核心对比</div>
+        <div class="card-body">
+            <table class="compare-table">
+                <thead><tr><th>项目</th><th>过渡期 (2023.10.1-2025.12.31)</th><th>正式期 (2026.1.1起)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>报告频率</td><td>每季度报告（季末后一个月内）</td><td>年度申报（次年9月30日前）</td></tr>
+                    <tr><td>证书义务</td><td>无</td><td>购买并清缴CBAM证书；季度持仓50%</td></tr>
+                    <tr><td>授权要求</td><td>无需授权</td><td>必须为授权申报商</td></tr>
+                    <tr><td>核查</td><td>自愿</td><td>强制第三方核查（实际排放）</td></tr>
+                    <tr><td>默认值使用</td><td>2024年7月31日前无限量；之后复杂商品≤20%可估计</td><td>按出口国平均强度+加乘，无数据时采用强度最高的10国平均值</td></tr>
+                    <tr><td>间接排放</td><td>所有行业均报告</td><td>逐步纳入，部分行业正式期仅直接排放（如铝、钢铁）</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 5. 行业默认值摘要（过渡期） -->
+    <div class="card">
+        <div class="card-header"><span class="icon">📊</span> 过渡期默认值摘要（吨CO₂e/吨产品）</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">钢铁（示例）</div>
+                    <table class="default-table">
+                        <thead><tr><th>产品</th><th>直接</th><th>间接</th><th>总</th></tr></thead>
+                        <tbody>
+                            <tr><td>生铁</td><td>1.90</td><td>0.17</td><td>2.07</td></tr>
+                            <tr><td>粗钢（锭）</td><td>2.52</td><td>0.23</td><td>2.75</td></tr>
+                            <tr><td>不锈钢板</td><td>2.21</td><td>1.99</td><td>4.19</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="section-title">水泥</div>
+                    <table class="default-table">
+                        <thead><tr><th>产品</th><th>直接</th><th>间接</th><th>总</th></tr></thead>
+                        <tbody>
+                            <tr><td>熟料</td><td>0.83</td><td>0.04</td><td>0.87</td></tr>
+                            <tr><td>硅酸盐水泥</td><td>0.81</td><td>0.06</td><td>0.87</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div class="section-title">铝</div>
+                    <table class="default-table">
+                        <thead><tr><th>产品</th><th>直接</th><th>间接</th><th>总</th></tr></thead>
+                        <tbody>
+                            <tr><td>未锻轧铝</td><td>2.36</td><td>8.14</td><td>10.49</td></tr>
+                            <tr><td>铝板/带</td><td>2.86</td><td>9.25</td><td>12.11</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="section-title">肥料/氢</div>
+                    <table class="default-table">
+                        <thead><tr><th>产品</th><th>直接</th><th>间接</th><th>总</th></tr></thead>
+                        <tbody>
+                            <tr><td>氨</td><td>2.68</td><td>0.14</td><td>2.82</td></tr>
+                            <tr><td>尿素</td><td>1.78</td><td>0.12</td><td>1.93</td></tr>
+                            <tr><td>氢</td><td>10.4</td><td>0.0</td><td>10.4</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="footnote">默认值为全球产量加权平均，仅过渡期使用。正式期默认值按出口国平均强度+加乘，无可靠数据时采用排放强度最高的10国平均值。</div>
+        </div>
+    </div>
+
+    <!-- 6. 排放计算与监测规则 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">📐</span> 嵌入排放计算与监测规则</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">🔢 计算公式</div>
+                    <ul class="list-styled">
+                        <li><strong>简单商品</strong>：SEE = AttrEm / AL</li>
+                        <li><strong>适用对象</strong>：简单商品指生产过程仅使用隐含碳排放为零的原料和燃料（如水泥熟料、原铝等），其嵌入排放完全来自生产过程本身</li>
+                        <li><strong>复杂商品</strong>：SEE = (AttrEm + Σ(M_i × SEE_i)) / AL</li>
+                        <li><strong>适用对象</strong>：复杂商品指需要投入其他CBAM商品（上游物料）作为原料的产品，例如水泥（需熟料）、钢铁产品（需粗钢）、混合肥料（需氨/尿素）等</li>
+                        <li>只有《实施细则》附件2第3节中明确列为“相关上游物料”才需纳入计算</li>
+			<li>SEE：每吨商品的特定隐含碳排放，单位为吨 CO₂e / 吨产品</li>
+			<li>AttrEM：归因排放量，即报告期内归因于该生产过程的直接排放与间接排放之和（扣除外供热量、废气及自产电力等），单位为吨 CO₂e</li>
+			<li>AL：报告期内该生产过程生产的商品总质量，单位为吨，对于电力则为MWh</li>
+			<li>M_i：报告期内，消耗的第 i 种上游物料的质量（吨）</li>
+			<li>SEE_i：该上游物料自身的特定隐含碳排放（吨 CO₂e / 吨上游物料），由上游物料生产商提供或通过默认值确定</li>
+                </div>
+                <div>
+                    <div class="section-title">⚙️ 监测方法</div>
+                    <ul class="list-styled">
+                        <li><strong>基于计算</strong>：标准法（活动数据×排放系数）或质量平衡法（钢铁行业常用）。</li>
+                        <li><strong>基于测量</strong>：CEMS（硝酸N₂O强制）。</li>
+                        <li><strong>合格MRV体系</strong>：过渡期至2024年底可用。</li>
+                    </ul>
+                    <div class="section-title">🔋 间接排放默认值</div>
+                    <ul class="list-styled">
+                        <li>过渡期：原产国电网五年平均排放因子（IEA数据），通过CBAM登记系统提供。</li>
+                        <li>正式期：采用出口国电网排放系数或CO₂排放系数，特定条件下可用实际值。</li>
+                    </ul>
+		    </ul>
+                    <div class="section-title">📌 系统边界调整（2025修订）</div>
+                    <ul class="list-styled">
+                        <li>对齐EU ETS，排除部分精加工过程（如钢铁、铝下游单独设施）的排放。</li>
+                        <li>电力作为商品仅核算直接排放（附件II新增）。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. 碳价抵扣与第三国合作 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">💰</span> 碳价抵扣规则</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">🌐 有效碳价抵扣（Art.9修订）</div>
+                    <ul class="list-styled">
+                        <li>在原产国或<strong>任何第三国</strong>实际支付的碳价（碳税/ETS）可从证书数量中扣除。</li>
+                        <li>需提供独立第三方认证的支付证明；或使用欧委会发布的<strong>年度默认碳价</strong>。</li>
+                        <li>任何退税/补偿应相应扣减。</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="section-title">🤝 第三国合作与豁免</div>
+                    <ul class="list-styled">
+                        <li>适用EU ETS或完全挂钩的国家（冰岛、列支敦士登、挪威、瑞士）全豁免。</li>
+                        <li>电力市场深度耦合且满足条件的第三国可临时豁免（至2030年审查）。</li>
+                        <li>欧委会通过气候俱乐部、IFCMA等平台促进全球碳定价协调。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. 授权申报商与登记系统 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">🖥️</span> 授权申报商与CBAM登记系统</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">📋 授权要求（Art.5）</div>
+                    <ul class="list-styled">
+                        <li>进口商（或间接海关代表）须申请授权，提供EORI、财务能力、无重大违法记录等。</li>
+                        <li><strong>间接海关代表必须获得授权</strong>，并承担进口商义务。</li>
+                        <li>授权前磋商程序改为可选（原强制）。</li>
+                        <li>2026年3月31日前提交申请者，在决定前可继续进口。</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="section-title">📁 登记系统功能</div>
+                    <ul class="list-styled">
+                        <li>过渡登记系统（2023.10启用）收集季度报告；正式期发展为CBAM注册系统，管理证书账户。</li>
+                        <li>与海关系统（EORI、SURV3）互操作。</li>
+                        <li>第三国运营商可注册设施信息，核查员可访问系统进行核查。</li>
+                        <li>公开信息包括运营商名称、地址、设施位置（可匿名）。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. 处罚与执行 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">⚠️</span> 处罚机制（Art.26修订）</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <div class="section-title">📌 授权申报商违规</div>
+                    <ul class="list-styled">
+                        <li>未足额清缴证书：罚款参照EU ETS超额排放罚款（100欧元/吨并随通胀调整）。</li>
+                        <li><strong>酌减情形</strong>：若因第三方（运营商/核查员）错误信息导致，可酌情降低罚款。</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="section-title">⚠️ 超阈值未授权进口</div>
+                    <ul class="list-styled">
+                        <li>罚款为上述金额的3-5倍（针对全部超阈值排放），但支付后免除申报与证书清缴义务。</li>
+                        <li>减轻情节：超阈值≤10%或过渡授权未决，罚款可降低（不低于第1款标准）。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. 时间线 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">⏳</span> 实施时间线（最新）</div>
+        <div class="card-body">
+            <div class="timeline-step">
+                <div class="step-item"><strong>2023.10.1</strong><br>过渡期开始</div>
+                <div class="step-item"><strong>2025.12.31</strong><br>过渡期结束</div>
+                <div class="step-item"><strong>2026.1.1</strong><br>正式期开始，微量豁免生效</div>
+                <div class="step-item"><strong>2026.3.31</strong><br>授权申请过渡窗口关闭</div>
+                <div class="step-item"><strong>2027.2.1</strong><br>开始销售CBAM证书</div>
+                <div class="step-item"><strong>2027.9.30</strong><br>首次年度申报</div>
+                <div class="step-item"><strong>2034</strong><br>EU ETS免费配额完全取消</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. 术语表 -->
+    <div class="card">
+        <div class="card-header"><span class="icon">📖</span> 关键术语表</div>
+        <div class="card-body">
+            <div class="grid-2col">
+                <div>
+                    <ul class="list-styled">
+                        <li><strong>嵌入排放</strong>：生产过程中的直接排放+所耗电力的间接排放+相关上游物料排放</li>
+                        <li><strong>简单商品</strong>：生产过程无需上游物料隐含碳排放的商品</li>
+                        <li><strong>复杂商品</strong>：简单商品以外的商品</li>
+                        <li><strong>实际排放量</strong>：基于生产原始数据计算的排放</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="list-styled">
+                        <li><strong>默认值</strong>：代表商品嵌入排放的估算值，由欧委会公布</li>
+                        <li><strong>合格MRV体系</strong>：第三国碳定价/强制监测/经核查的监测计划</li>
+                        <li><strong>报告申报人</strong>：过渡期负责季度报告的主体</li>
+                        <li><strong>授权申报商</strong>：正式期经授权的进口商或间接海关代表</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footnote" style="background:#e6f2f9; text-align:center;">
+        📌 本图解整合了以下欧盟官方文件：<br>
+        (EU) 2023/956（基础条例）、(EU) 2023/1773（实施条例）、指导文件（2023.12.8）、问答备忘录（2023.5/7）、过渡期默认值（2023.12.22）、(EU) 2025/2083（简化条例）。<br>
+        内容以最新修订为准，完整法律文本请查阅欧盟官方公报。
+    </div>
+</div>
+</body>
+</html>
