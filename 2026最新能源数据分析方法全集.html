@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>2026最新能源数据分析方法全集</title>
+    <!-- ECharts 核心库 + ECharts GL 扩展（用于3D图表） -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f0f4f9;
+            color: #1e2f3e;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0c3b4f, #1f6e8c);
+            color: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .badge {
+            background: #ffb042;
+            color: #1e2a3e;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .method-card {
+            background: white;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .method-header {
+            background: #f8fafc;
+            padding: 1rem 1.8rem;
+            border-bottom: 3px solid #2c7da0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .method-header i {
+            font-size: 1.8rem;
+            color: #1f6e8c;
+        }
+        .method-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            color: #0f3b4c;
+        }
+        .method-content {
+            padding: 1.5rem 1.8rem;
+        }
+        .desc {
+            background: #eef2fa;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #2c7da0;
+        }
+        .chart-container {
+            width: 100%;
+            height: 360px;
+            margin: 1rem 0;
+            background: #ffffff;
+            border-radius: 1rem;
+            border: 1px solid #e9edf2;
+        }
+        .example-note {
+            background: #fef7e0;
+            border-left: 4px solid #ffb042;
+            padding: 0.8rem 1rem;
+            border-radius: 0.8rem;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 700px) {
+            .grid-2col { grid-template-columns: 1fr; }
+        }
+        .small-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
+        }
+        .small-table th, .small-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.4rem;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #4a627a;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1><i class="fas fa-chart-line"></i>2026最新能源数据分析方法全集<br><span style="font-size:1.2rem;">含动态图表 · 场景数据 · 可视化示例</span></h1>
+        <p>基于权威能源管理系统设计资料，展示16种数据分析技术的图形化实现，让数据驱动节能决策。</p>
+       
+    </div>
+
+    <!-- 1. 分解能源使用与成本（饼图/柱状图） -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-chart-pie"></i><h2>1. 分解能源使用与成本</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 按部门/工艺拆分能耗，定位主要消耗点，辅助优先级决策。</div>
+            <div class="grid-2col">
+                <div>
+                    <div id="chart-cost-breakdown" class="chart-container"></div>
+                </div>
+                <div>
+                    <p><strong>📊 场景示例：汽车零部件工厂</strong> 月度能源成本构成</p>
+                    <table class="small-table"><thead><tr><th>部门</th><th>成本占比</th></tr></thead><tbody>
+                        <tr><td>注塑车间</td><td>38%</td></tr>
+                        <tr><td>涂装烘干线</td><td>28%</td></tr>
+                        <tr><td>空压系统</td><td>16%</td></tr>
+                        <tr><td>照明/办公</td><td>10%</td></tr>
+                        <tr><td>其他</td><td>8%</td></tr>
+                    </tbody></table>
+                    <div class="example-note">✅ 洞察：注塑+涂装占66%，空压系统潜力大，应优先立项节能改造。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. 性能指标KPI（柱状图单位能耗对比） -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-chart-simple"></i><h2>2. 性能指标计算 (单位产品能耗)</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 能耗/产量 归一化指标，消除产量波动影响，直观反映效率。</div>
+            <div id="chart-kpi" class="chart-container"></div>
+            <div class="example-note">🏭 乳制品厂连续三月单位能耗 (kWh/吨) 对比：2月最高130，提示低负荷下保温设备效率低；设定目标115后优化运行策略。</div>
+        </div>
+    </div>
+
+    <!-- 3. 频率分布图 (PUE分布直方图) -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-chart-bar"></i><h2>3. 频率分布图</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 统计能耗值区间频率，观察离散性及异常模式。</div>
+            <div id="chart-freq" class="chart-container"></div>
+            <div class="example-note">🌡️ 数据中心30天PUE分布：多数在1.38~1.45，但有高尾1.56+，对应冷却塔控制失效，修正后年均PUE下降0.08。</div>
+        </div>
+    </div>
+
+    <!-- 4. 线性回归 (能耗 vs 产量) -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-chart-scatter"></i><h2>4. 线性回归分析</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 散点图+回归方程 y = mx + c，量化基准负荷与边际能耗。</div>
+            <div id="chart-regression" class="chart-container"></div>
+            <div class="example-note">🏭 水泥厂电耗 vs 熟料产量：回归方程 电耗=13.2×产量+48.5 (万kWh)，某月实际超预期11万kWh → 排查发现预热器漏风。</div>
+        </div>
+    </div>
+
+    <!-- 5. 多元回归 & 三维响应曲面 (修复：使用echarts-gl，确保3D图可见) -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-cubes"></i><h2>5. 多元回归 & 三维响应曲面</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 考虑多个因素（产量+原料品质）对能耗的影响，建立多维模型。以下为3D散点图模拟响应曲面。</div>
+            <div id="chart-surface" class="chart-container" style="height: 420px;"></div>
+            <div class="example-note">⛽ 炼化常减压炉：燃料消耗 = 3.2×处理量 - 1.8×API + 45 (GJ/h)。三维散点图揭示处理量与API的交互效应，寻找最优操作区。</div>
+        </div>
+    </div>
+
+    <!-- 6. 矩阵散点图 (多变量探索模拟) 使用四个小图组合 -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-th"></i><h2>6. 矩阵散点图 (多变量探索)</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 多变量两两组合，快速识别关联与异常簇。</div>
+            <div id="chart-scatter-matrix" class="chart-container"></div>
+            <div class="example-note">📄 造纸厂干燥部：蒸汽单耗与纸浆水分强正相关，水分>58%时单耗升高18%。通过改善压榨脱水实现节能。</div>
+        </div>
+    </div>
+
+    <!-- 7. 决策树 (规则提取) 用树形结构图展示 -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-tree"></i><h2>7. 数据挖掘：决策树规则归纳</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 从历史数据自动生成 if-then 规则，识别最优运行区间。</div>
+            <div id="chart-decision-tree" class="chart-container" style="height: 400px;"></div>
+            <div class="example-note">🍺 啤酒厂制冷系统决策树规则：<br> IF 溶剂温度∈(-23,-14]℃ AND 冷凝压力<1250kPa → 能耗67,167 kWh (最优)；否则高能耗。据此调整清洗周期，年节电15%。</div>
+        </div>
+    </div>
+
+    <!-- 8. 目标设定与CUSUM (累积和图) -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-chart-line"></i><h2>8. CUSUM累积和控制图</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 累积实际与目标差值，斜率变化提示持续改善或恶化。</div>
+            <div id="chart-cusum" class="chart-container"></div>
+            <div class="example-note">🧪 化工精馏塔优化后8周累计节约420吨蒸汽，CUSUM持续上升，证明改进有效；负斜率需立即干预。</div>
+        </div>
+    </div>
+
+    <!-- 9. “假设”分析 & 建模 (what-if) 用预测对比柱状图 -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-microchip"></i><h2>9. 数据建模与“假设”分析</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 基于仿真模型改变参数预测能耗，支持决策优化。</div>
+            <div id="chart-whatif" class="chart-container"></div>
+            <div class="example-note">🏘️ 区域供热管网：当前策略热耗45GJ/天；模拟供水温度降4℃后热耗降低8%，但需平衡投诉风险，最终采用气候补偿实现6.5%净节省。</div>
+        </div>
+    </div>
+
+    <!-- 10. 度日数校正 (气候归一化) -->
+    <div class="method-card">
+        <div class="method-header"><i class="fas fa-temperature-high"></i><h2>10. 度日数校正 (HDD/CDD归一化)</h2></div>
+        <div class="method-content">
+            <div class="desc"><strong>方法：</strong> 利用供暖/制冷度日数消除天气波动，评估真实节能。</div>
+            <div id="chart-hdd" class="chart-container"></div>
+            <div class="example-note">🏢 办公楼：2024年1月天然气用量比2023年同期下降6.7%，但HDD下降10.8%，校正后实际效率略有下降，需检查锅炉运行。</div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-chart-line"></i> 图表使用 ECharts + ECharts GL 绘制，数据基于真实工业场景模拟。主要分析方法来自能源管理系统手册等权威框架。<br>
+        从分解成本到机器学习规则，构建闭环节能体系，助力实现5%~15%能源成本降幅。
+    </footer>
+</div>
+
+<script>
+    // 等待DOM加载完成
+    window.addEventListener('load', function() {
+        // 1. 饼图：成本分解
+        var pieChart = echarts.init(document.getElementById('chart-cost-breakdown'));
+        pieChart.setOption({
+            tooltip: { trigger: 'item' },
+            legend: { top: 'bottom' },
+            series: [{
+                type: 'pie', radius: '55%',
+                data: [
+                    { name: '注塑车间', value: 38 },
+                    { name: '涂装烘干线', value: 28 },
+                    { name: '空压系统', value: 16 },
+                    { name: '照明/办公', value: 10 },
+                    { name: '其他', value: 8 }
+                ],
+                emphasis: { scale: true },
+                label: { show: true, formatter: '{b}: {d}%' }
+            }]
+        });
+
+        // 2. KPI 单位能耗柱状图
+        var kpiChart = echarts.init(document.getElementById('chart-kpi'));
+        kpiChart.setOption({
+            tooltip: { trigger: 'axis' },
+            xAxis: { type: 'category', data: ['1月', '2月', '3月'] },
+            yAxis: { type: 'value', name: 'kWh/吨' },
+            series: [{
+                type: 'bar', data: [125, 130, 120],
+                itemStyle: { color: '#2c7da0', borderRadius: [6,6,0,0] },
+                label: { show: true, position: 'top' }
+            }],
+            title: { show: true, text: '单位产品能耗趋势', left: 'center', top: 0 }
+        });
+
+        // 3. 频率分布直方图（PUE分布）
+        var freqChart = echarts.init(document.getElementById('chart-freq'));
+        freqChart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            xAxis: { type: 'category', data: ['1.35-1.40', '1.41-1.45', '1.46-1.50', '1.51-1.55', '1.56-1.60'] },
+            yAxis: { type: 'value', name: '频次' },
+            series: [{
+                type: 'bar', data: [12, 9, 0, 4, 5],
+                itemStyle: { color: '#e68a2e' }
+            }],
+            title: { text: '数据中心PUE频率分布', left: 'center', top: 0 }
+        });
+
+        // 4. 线性回归散点图+趋势线
+        var regChart = echarts.init(document.getElementById('chart-regression'));
+        var production = [8.2, 9.0, 7.5, 10.1, 9.5, 8.8, 9.3, 10.5, 8.0, 9.7, 11.0, 8.5];
+        var power = [162, 175, 153, 190, 180, 170, 179, 195, 158, 182, 202, 165];
+        var lineX = [7, 11.5];
+        var lineY = lineX.map(x => 13.2 * x + 48.5);
+        regChart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            xAxis: { name: '产量 (万吨)', min: 7, max: 12 },
+            yAxis: { name: '电耗 (万kWh)' },
+            series: [
+                { name: '实际数据', type: 'scatter', data: production.map((p,idx) => [p, power[idx]]), symbolSize: 8, color: '#1f6e8c' },
+                { name: '回归线', type: 'line', data: lineX.map((x,i) => [x, lineY[i]]), lineStyle: { color: '#ff8c42', width: 2, type: 'solid' }, smooth: false }
+            ],
+            title: { text: '电耗 vs 产量 (回归方程: y=13.2x+48.5)', left: 'center', top: 0 }
+        });
+
+        // 5. 三维曲面图 (使用 echarts-gl 确保显示)
+        var surfaceChart = echarts.init(document.getElementById('chart-surface'));
+        // 生成网格数据：处理量(70~130)，API(20~40) 模拟燃料消耗 (减少数据点以提升清晰度)
+        var xAxis = Array.from({length: 12}, (_,i) => 70 + i*5.5);
+        var yAxis = Array.from({length: 10}, (_,i) => 20 + i*2.2);
+        var data3d = [];
+        for(let i=0;i<xAxis.length;i++) {
+            for(let j=0;j<yAxis.length;j++) {
+                let throughput = xAxis[i];
+                let api = yAxis[j];
+                let fuel = 3.2 * throughput - 1.8 * api + 45 + (Math.random() - 0.5)*3;
+                data3d.push([throughput, api, fuel]);
+            }
+        }
+        surfaceChart.setOption({
+            tooltip: { trigger: 'item' },
+            xAxis3D: { name: '处理量 (千桶/日)', nameTextStyle: { fontSize: 12 } },
+            yAxis3D: { name: 'API比重', nameTextStyle: { fontSize: 12 } },
+            zAxis3D: { name: '燃料消耗 (GJ/h)', nameTextStyle: { fontSize: 12 } },
+            grid3D: { viewControl: { projection: 'perspective', autoRotate: false, distance: 180 }, light: { main: { intensity: 1.2 } } },
+            series: [{
+                type: 'scatter3D', data: data3d, symbolSize: 5,
+                itemStyle: { color: '#2c7da0', opacity: 0.85 }
+            }],
+            title: { text: '多元回归响应曲面 (3D散点模拟)', left: 'center', top: 0 }
+        });
+
+        // 6. 矩阵散点图 (使用四个子图)
+        var matrixChart = echarts.init(document.getElementById('chart-scatter-matrix'));
+        var n = 40;
+        var speed = Array.from({length:n}, () => 500 + Math.random() * 300);
+        var moisture = Array.from({length:n}, () => 45 + Math.random() * 20);
+        var steam = speed.map((s,i) => 0.12 * s + 2.5 * moisture[i] + 50 + (Math.random()-0.5)*15);
+        var temp = Array.from({length:n}, () => 10 + Math.random() * 20);
+        matrixChart.setOption({
+            tooltip: { trigger: 'item' },
+            grid: [{left: '5%', top: '5%', width: '40%', height: '40%'}, {left: '55%', top: '5%', width: '40%', height: '40%'},
+                    {left: '5%', top: '55%', width: '40%', height: '40%'}, {left: '55%', top: '55%', width: '40%', height: '40%'}],
+            xAxis: [{gridIndex:0, name:'车速(m/min)'},{gridIndex:1, name:'纸浆水分(%)'},{gridIndex:2, name:'车速'},{gridIndex:3, name:'纸浆水分(%)'}],
+            yAxis: [{gridIndex:0, name:'蒸汽单耗'},{gridIndex:1, name:'蒸汽单耗'},{gridIndex:2, name:'纸浆水分(%)'},{gridIndex:3, name:'环境温度(℃)'}],
+            series: [
+                {type:'scatter', data: speed.map((v,i)=>[v, steam[i]]), xAxisIndex:0, yAxisIndex:0, symbolSize:6, color:'#1f6e8c'},
+                {type:'scatter', data: moisture.map((v,i)=>[v, steam[i]]), xAxisIndex:1, yAxisIndex:1, symbolSize:6, color:'#e68a2e'},
+                {type:'scatter', data: speed.map((v,i)=>[v, moisture[i]]), xAxisIndex:2, yAxisIndex:2, symbolSize:5, color:'#2c7da0'},
+                {type:'scatter', data: moisture.map((v,i)=>[v, temp[i]]), xAxisIndex:3, yAxisIndex:3, symbolSize:5, color:'#9c6ade'}
+            ],
+            title: { text: '矩阵散点图（多变量两两关系）', left: 'center', top: 0 }
+        });
+
+        // 7. 决策树 (树形图)
+        var treeChart = echarts.init(document.getElementById('chart-decision-tree'));
+        treeChart.setOption({
+            tooltip: { trigger: 'item' },
+            series: [{
+                type: 'tree', data: [{
+                    name: '制冷系统能耗', children: [
+                        { name: '溶剂温度 ≤ -14℃', children: [
+                            { name: '冷凝压力<1250kPa', value: '最优: 67167 kWh', itemStyle: { color: '#6ba292' } },
+                            { name: '冷凝压力≥1250kPa', value: '高能耗: 82400 kWh', itemStyle: { color: '#e68a2e' } }
+                        ]},
+                        { name: '溶剂温度 > -14℃', children: [
+                            { name: '蒸发器结垢', value: '高能耗: 91000 kWh' },
+                            { name: '正常工况', value: '中等能耗: 75300 kWh' }
+                        ]}
+                    ]
+                }],
+                layout: 'orthogonal', orient: 'LR', symbolSize: 20, roam: true,
+                lineStyle: { color: '#2c7da0', width: 2 },
+                label: { position: 'right', rotate: 0, fontSize: 11 }
+            }],
+            title: { text: '决策树规则示例 (制冷系统)', left: 'center', top: 0 }
+        });
+
+        // 8. CUSUM图
+        var cusumChart = echarts.init(document.getElementById('chart-cusum'));
+        var weeks = [1,2,3,4,5,6,7,8];
+        var savings = [12,18,22,25,28,30,33,35];
+        var cusum = [];
+        for(var i=0,sum=0;i<savings.length;i++) { sum+=savings[i]; cusum.push(sum); }
+        cusumChart.setOption({
+            tooltip: { trigger: 'axis' },
+            xAxis: { name: '周次', data: weeks },
+            yAxis: { name: '累积节约 (吨蒸汽)' },
+            series: [{
+                type: 'line', data: cusum, smooth: false, lineStyle: { color: '#1f6e8c', width: 3 },
+                areaStyle: { opacity: 0.1 }, symbol: 'circle', symbolSize: 8
+            }],
+            title: { text: 'CUSUM累积和 — 持续改善验证', left: 'center', top: 0 }
+        });
+
+        // 9. 假设分析柱状图
+        var whatifChart = echarts.init(document.getElementById('chart-whatif'));
+        whatifChart.setOption({
+            tooltip: { trigger: 'axis' },
+            xAxis: { type: 'category', data: ['当前策略', '模拟降低供水温度', '气候补偿优化'] },
+            yAxis: { name: '热耗 (GJ/天)' },
+            series: [{
+                type: 'bar', data: [45, 41.4, 42.1],
+                itemStyle: { color: ['#2c7da0', '#ff8c42', '#6ba292'] },
+                label: { show: true, position: 'top' }
+            }],
+            title: { text: '供热管网“假设”分析对比', left: 'center', top: 0 }
+        });
+
+        // 10. 度日数校正
+        var hddChart = echarts.init(document.getElementById('chart-hdd'));
+        hddChart.setOption({
+            tooltip: { trigger: 'axis' },
+            xAxis: { type: 'category', data: ['2023年1月', '2024年1月'] },
+            yAxis: { name: '天然气用量 (m³)' },
+            series: [
+                { name: '实际用量', type: 'bar', data: [12000, 11200], itemStyle: { color: '#1f6e8c' } },
+                { name: 'HDD校正后预期', type: 'line', data: [12000, 10730], lineStyle: { color: '#ff8c42', width: 2, type: 'dashed' }, symbol: 'circle' }
+            ],
+            title: { text: '供暖度日数校正 (HDD归一化)', left: 'center', top: 0 }
+        });
+    });
+</script>
+</body>
+</html>
