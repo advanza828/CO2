@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第3卷 工业节能技术与系统优化</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', 'SimSun', Arial, sans-serif; line-height: 2.2; background: #f5f7fa; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #c0392b, #e74c3c); color: #fff; padding: 30px 50px; }
+        .header h1 { font-size: 2em; margin-bottom: 10px; }
+        .header .tag { background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 20px; display: inline-block; margin-top: 10px; }
+        .content { padding: 40px; }
+        h2 { color: #c0392b; border-left: 6px solid #c0392b; padding-left: 20px; margin: 40px 0 25px; font-size: 1.6em; }
+        h3 { color: #a93226; margin: 30px 0 15px; font-size: 1.3em; }
+        h4 { color: #c0392b; margin: 25px 0 12px; font-size: 1.1em; }
+        p { margin-bottom: 18px; color: #333; font-size: 1.05em; }
+        .advanced-box { background: linear-gradient(135deg, #fadbd8, #f5b7b1); border-left: 6px solid #e74c3c; padding: 25px; margin: 25px 0; border-radius: 8px; }
+        .tech-box { background: linear-gradient(135deg, #fef9e7, #fdebd0); border-left: 6px solid #f39c12; padding: 25px; margin: 25px 0; border-radius: 8px; }
+        .green-box { background: linear-gradient(135deg, #e9f7ef, #d5f5e3); border-left: 6px solid #27ae60; padding: 25px; margin: 25px 0; border-radius: 8px; }
+        .case-box { background: #f8f9fa; border: 2px solid #e9ecef; padding: 30px; margin: 30px 0; border-radius: 12px; }
+        .case-title { color: #c0392b; font-weight: bold; margin-bottom: 15px; font-size: 1.2em; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95em; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #c0392b; color: #fff; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .formula { background: linear-gradient(135deg, #fdedec, #fadbd8); padding: 20px 30px; margin: 20px 0; border-radius: 8px; font-family: 'Times New Roman', serif; text-align: center; font-size: 1.1em; color: #c0392b; font-weight: bold; border: 2px solid #c0392b; }
+        ul, ol { margin: 15px 0 15px 35px; }
+        li { margin-bottom: 10px; color: #333; }
+        .footer { background: #c0392b; color: #fff; padding: 25px 50px; text-align: center; font-size: 0.95em; }
+        .footer a { color: #fff; margin: 0 15px; }
+        .warning { color: #e74c3c; font-weight: bold; }
+        .highlight { background: #fff3cd; padding: 2px 8px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>第3卷 工业节能技术与系统优化</h1>
+            <p>CCUS碳捕集利用与封存 · 氢能冶金 · 绿色低碳技术</p>
+            <p><a href="index.html" style="color:#fff;">📚 目录</a> | <a href="chapter2.html" style="color:#fff;">上一章</a> | <a href="chapter4.html" style="color:#fff;">下一章</a></p>
+        </div>
+<!-- ========== Part A: CCUS ========== -->
+            <h2 id="p1">🏭 Part A：CCUS碳捕集利用与封存技术</h2>
+            
+            <div class="advanced-box">
+                <h3>3.A.1 CCUS技术概述</h3>
+                <p><strong>CCUS（Carbon Capture, Utilization and Storage）</strong>是目前实现大规模温室气体减排的关键技术组合，被公认为是应对气候变化的重要技术路径之一。</p>
+                
+                <div class="formula">
+                    CCUS = Carbon Capture（捕集） + Carbon Utilization（利用） + Carbon Storage（封存）
+                </div>
+                
+                <h4>CCUS技术分类</h4>
+                <table>
+                    <tr><th>技术路线</th><th>技术描述</th><th>捕集成本</th><th>成熟度</th><th>适用场景</th></tr>
+                    <tr><td>燃烧后捕集</td><td>从燃烧尾气中分离CO₂</td><td>50-80美元/t</td><td>商业化</td><td>现有电厂改造</td></tr>
+                    <tr><td>燃烧前捕集</td><td>燃料气化后分离CO₂</td><td>40-60美元/t</td><td>示范</td><td>IGCC电站</td></tr>
+                    <tr><td>富氧燃烧</td><td>使用纯氧燃烧，尾气高浓度CO₂</td><td>30-50美元/t</td><td>中试</td><td>新建项目</td></tr>
+                    <tr><td>直接空气捕集(DAC)</td><td>从大气中直接捕集CO₂</td><td>200-600美元/t</td><td>早期示范</td><td>分布式部署</td></tr>
+                </table>
+            </div>
+            
+            <h3>3.A.2 燃烧后捕集技术</h3>
+            
+            <h4>3.A.2.1 化学吸收法</h4>
+            <p>燃烧后捕集最成熟的技术，使用有机胺溶剂（如MEA、DEA、MDEA）吸收烟气中的CO₂。</p>
+            
+            <div class="formula">
+                CO₂ + 2R₂NH → R₂NH₂⁺ + R₂NCOO⁻  【吸收反应】<br/>
+                R₂NH₂⁺ + R₂NCOO⁻ + 热量 → 2R₂NH + CO₂↑  【解吸反应】
+            </div>
+            
+            <h4>主要吸收剂对比</h4>
+            <table>
+                <tr><th>吸收剂</th><th>吸收效率</th><th>再生能耗(kJ/kgCO₂)</th><th>降解速率</th><th>成本</th></tr>
+                <tr><td>MEA (一乙醇胺)</td><td>高</td><td>3500-4000</td><td>快</td><td>低</td></tr>
+                <tr><td>MDEA (甲基二乙醇胺)</td><td>中</td><td>2000-2500</td><td>慢</td><td>中</td></tr>
+                <tr><td>复合胺溶剂</td><td>高</td><td>2300-2800</td><td>慢</td><td>中</td></tr>
+                <tr><td>离子液体</td><td>高</td><td>1500-2000</td><td>极慢</td><td>高</td></tr>
+            </table>
+            
+            <h4>3.A.2.2 物理吸附法</h4>
+            <p>利用多孔材料（活性炭、分子筛、金属有机框架MOF）的选择性吸附能力捕集CO₂。</p>
+            
+            <div class="formula">
+                CO₂吸附量 ∝ 比表面积 × 微孔体积 × 表面活性位点<br/>
+                MOF材料（金属有机框架）：理论吸附量可达2000 mmol/kg
+            </div>
+            
+            <h3>3.A.3 燃烧前捕集技术</h3>
+            <p>燃烧前捕集将CO₂在燃烧前分离，主要应用于整体煤气化联合循环（IGCC）和多联产系统。</p>
+            
+            <div class="formula">
+                煤气化: CHₓ + O₂ + H₂O → H₂ + CO + CO₂ + CH₄<br/>
+                水煤气变换: CO + H₂O → CO₂ + H₂<br/>
+                CO₂分离 → H₂作为燃料燃烧（近乎零碳）
+            </div>
+            
+            <h3>3.A.4 直接空气捕集（DAC）</h3>
+            
+            <div class="tech-box">
+                <h4>DAC技术原理</h4>
+                <p>DAC（Direct Air Capture）从大气中直接捕集CO₂，不受排放源限制，但CO₂浓度低（~400ppm），能耗和成本较高。</p>
+                
+                <table>
+                    <tr><th>DAC技术</th><th>公司</th><th>吸附剂</th><th>能耗(kWh/tCO₂)</th><th>成本(美元/t)</th></tr>
+                    <tr><td>固体吸附剂</td><td>Climeworks</td><td>功能化过滤器</td><td>1500-2000</td><td>400-600</td></tr>
+                    <tr><td>液体吸收剂</td><td>Carbon Engineering</td><td>KOH溶液</td><td>1200-1800</td><td>200-400</td></tr>
+                    <tr><td>新型吸附剂</td><td>研究阶段</td><td>MOF/COFs</td><td>预计<500</td><td>预计<100</td></tr>
+                </table>
+            </div>
+            
+            <h3>3.A.5 CO₂利用技术</h3>
+            
+            <table>
+                <tr><th>利用方向</th><th>技术</th><th>产品</th><th>CO₂消耗量</th><th>成熟度</th></tr>
+                <tr><td rowspan="2">化工利用</td><td>合成可降解塑料</td><td>PPC、PPC多元醇</td><td>1.5 tCO₂/t产品</td><td>商业化</td></tr>
+                <tr><td>合成燃料</td><td>e-fuel、甲醇</td><td>高</td><td>示范</td></tr>
+                <tr><td rowspan="2">建筑材料</td><td>矿化养护混凝土</td><td>低碳混凝土</td><td>0.1-0.3 tCO₂/m³</td><td>商业化</td></tr>
+                <tr><td>CO₂矿化</td><td>固废资源化</td><td>碳酸盐产品</td><td>变量</td><td>示范</td></tr>
+                <tr><td>农业利用</td><td>温室栽培</td><td>促进植物生长</td><td>5-10 tCO₂/ha/年</td><td>商业化</td></tr>
+                <tr><td>生物利用</td><td>微藻养殖</td><td>生物柴油、蛋白</td><td>1-2 tCO₂/t藻</td><td>示范</td></tr>
+                <tr><td rowspan="2">地质利用</td><td>提高采收率(EOR)</td><td>石油+CO₂封存</td><td>0.3-0.5 tCO₂/t油</td><td>商业化</td></tr>
+                <tr><td>富CO₂驱煤层气</td><td>煤层气开采</td><td>气体燃料</td><td>变量</td><td>示范</td></tr>
+            </table>
+            
+            <h3>3.A.6 CO₂封存技术</h3>
+            
+            <div class="case-box">
+                <div class="case-title">📊 主要CO₂封存地质体对比</div>
+                <table>
+                    <tr><th>封存类型</th><th>容量(Gt)</th><th>封存周期</th><th>安全性</th><th>成本(美元/t)</th></tr>
+                    <tr><td>深部咸水层</td><td>1000-10000</td><td>>10000年</td><td>高</td><td>10-30</td></tr>
+                    <tr><td>衰竭油气藏</td><td>500-900</td><td>>10000年</td><td>高</td><td>5-20</td></tr>
+                    <tr><td>不可采煤层</td><td>30-200</td><td>>10000年</td><td>中高</td><td>10-30</td></tr>
+                    <tr><td>玄武岩矿化</td><td>未知</td><td>永久</td><td>极高</td><td>50-100</td></tr>
+                </table>
+            </div>
+            
+            <!-- ========== Part B: 氢能冶金 ========== -->
+            <h2 id="p2">🔥 Part B：氢能冶金技术</h2>
+            
+            <div class="advanced-box">
+                <h3>3.B.1 钢铁行业碳排放现状</h3>
+                <p>钢铁行业是碳排放重点行业，全球钢铁行业碳排放占工业碳排放的25-30%，占全球总排放的7-9%。</p>
+                
+                <table>
+                    <tr><th>指标</th><th>数值</th><th>说明</th></tr>
+                    <tr><td>全球钢产量</td><td>约19亿吨/年</td><td>2023年</td></tr>
+                    <tr><td>吨钢平均碳排放</td><td>1.8-2.2 tCO₂/t</td><td>长流程最高</td></tr>
+                    <tr><td>中国钢产量</td><td>约10亿吨/年</td><td>占全球55%</td></tr>
+                    <tr><td>中国钢铁碳排放</td><td>约18亿吨/年</td><td>占全国15%</td></tr>
+                </table>
+                
+                <div class="warning">
+                    ⚠️ 碳约束挑战：欧盟碳边境调节机制（CBAM）于2026年全面实施，钢铁进口面临碳关税压力（约100欧元/tCO₂）。
+                </div>
+            </div>
+            
+            <h3>3.B.2 氢能冶金原理</h3>
+            
+            <p>氢能冶金（氢基直接还原铁，H-DRI）使用绿氢代替焦炭作为还原剂，从根本上减少碳排放。</p>
+            
+            <div class="formula">
+                【传统高炉工艺（碳还原）】<br/>
+                Fe₂O₃ + 3C → 2Fe + 3CO    ΔH > 0（吸热）<br/><br/>
+                【氢基直接还原工艺（氢还原）】<br/>
+                Fe₂O₃ + 3H₂ → 2Fe + 3H₂O  ΔH > 0（吸热，但无CO₂排放）
+            </div>
+            
+            <div class="formula">
+                碳减排原理：<br/>
+                碳还原：每吨铁排放 ~1.6 tCO₂（焦炭+电力）<br/>
+                氢还原：每吨铁排放 ~0-0.2 tCO₂（绿氢制备有少量排放）<br/>
+                减排幅度：可达90%以上
+            </div>
+            
+            <h3>3.B.3 氢基直接还原铁技术路线</h3>
+            
+            <table>
+                <tr><th>工艺路线</th><th>技术</th><th>还原剂</th><th>成熟度</th><th>代表项目</th></tr>
+                <tr><td>Midrex</td><td>竖炉直接还原</td><td>天然气/焦炉煤气</td><td>商业化</td><td>沙钢H₂项目</td></tr>
+                <tr><td>HYL/Energiron</td><td>竖炉直接还原</td><td>天然气/氢气</td><td>商业化</td><td>瑞典HYBRIT</td></tr>
+                <tr><td>Finex</td><td>流化床+竖炉</td><td>煤/天然气</td><td>商业化</td><td>浦项Finex</td></tr>
+                <tr><td>氢基竖炉</td><td>100%氢气竖炉</td><td>绿氢</td><td>示范</td><td>SSAB/SSG</td></tr>
+                <tr><td>熔融还原</td><td>氢基熔融还原</td><td>氢气</td><td>研发</td><td>TENOVA H2</td></tr>
+            </table>
+            
+            <h3>3.B.4 氢气供应与经济性</h3>
+            
+            <div class="tech-box">
+                <h4>绿氢制备成本预测</h4>
+                <p>绿氢是氢能冶金的关键原料，其成本直接影响技术经济可行性。</p>
+                
+                <table>
+                    <tr><th>年份</th><th>电解槽成本</th><th>电价</th><th>绿氢成本</th><th>备注</th></tr>
+                    <tr><td>2023年</td><td>$600-800/kW</td><td>$0.03-0.06/kWh</td><td>$3-6/kg</td><td>部分地区可达到</td></tr>
+                    <tr><td>2030年（预测）</td><td>$200-300/kW</td><td>$0.02-0.04/kWh</td><td>$1.5-3/kg</td><td>主流预测</td></tr>
+                    <tr><td>2050年（展望）</td><td>$100/kW</td><td>$0.01-0.02/kWh</td><td>$0.5-1/kg</td><td>乐观预测</td></tr>
+                </table>
+                
+                <div class="formula">
+                    吨钢氢气消耗（理论值）:<br/>
+                    Fe₂O₃ → 2Fe: 需H₂ = 3 × (2×56)/(3×16) = 1.05 tH₂/tFe<br/>
+                    考虑工艺效率，实际约需 0.6-0.8 tH₂/tDRI
+                </div>
+            </div>
+            
+            <h3>3.B.5 全球氢能冶金项目</h3>
+            
+            <div class="case-box">
+                <div class="case-title">📊 代表性氢能冶金项目</div>
+                <table>
+                    <tr><th>项目</th><th>企业</th><th>地点</th><th>规模</th><th>目标</th><th>进展</th></tr>
+                    <tr><td>HYBRIT</td><td>SSAB/LKAB/Vattenfall</td><td>瑞典</td><td>中试→商业化</td><td>无化石钢铁</td><td>中试完成</td></tr>
+                </table>
+                <p style="margin-top:15px;font-size:0.95em;color:#666;">全球主要氢能冶金项目还包括：德国Salzgitter的SALCOS项目（Salzgitter AG）、奥钢联H2FUTURE项目、西班牙ArcelorMittalHidrogen项目的积极推进。</p>
+            </div>
+            
+            <!-- ========== Part C: 绿色低碳技术 ========== -->
+            <h2 id="p3">🌱 Part C：绿色低碳前沿技术</h2>
+            
+            <div class="green-box">
+                <h3>3.C.1 储能技术全景图</h3>
+                <p>储能是构建以新能源为主体的新型电力系统的关键技术，支撑可再生能源高比例消纳。</p>
+                
+                <table>
+                    <tr><th>储能类型</th><th>技术</th><th>效率(%)</th><th>寿命(年)</th><th>成本(元/kWh)</th><th>应用场景</th></tr>
+                    <tr><td rowspan="2">机械储能</td><td>抽水蓄能</td><td>75-85</td><td>50-60</td><td>300-500</td><td>电网调峰</td></tr>
+                    <tr><td>压缩空气(CAES)</td><td>50-70</td><td>30-40</td><td>400-800</td><td>大规模调峰</td></tr>
+                    <tr><td rowspan="3">电化学储能</td><td>磷酸铁锂电池</td><td>90-95</td><td>10-15</td><td>600-1000</td><td>全场景</td></tr>
+                    <tr><td>钠离子电池</td><td>85-90</td><td>8-12</td><td>400-700</td><td>储能备用</td></tr>
+                    <tr><td>全钒液流电池</td><td>70-80</td><td>15-20</td><td>1500-2500</td><td>长时储能</td></tr>
+                    <tr><td rowspan="2">储热</td><td>熔盐储热</td><td>40-50</td><td>25-30</td><td>200-400</td><td>光热/工业余热</td></tr>
+                    <tr><td>相变储热</td><td>80-90</td><td>20-30</td><td>300-500</td><td>建筑供热</td></tr>
+                    <tr><td>氢储能</td><td>电解水+储氢</td><td>30-40</td><td>15-20</td><td>1000-2000</td><td>跨季节储能</td></tr>
+                </table>
+            </div>
+            
+            <h3>3.C.2 虚拟电厂（VPP）</h3>
+            <p>虚拟电厂通过聚合分布式能源、储能、可控负荷等资源，实现参与电力市场和电网调峰调频。</p>
+            
+            <div class="formula">
+                VPP = Σ(分布式光伏) + Σ(储能系统) + Σ(可控负荷) + Σ(需求响应)<br/><br/>
+                聚合容量 = 10-100 MW级<br/>
+                响应时间 = 分钟级<br/>
+                调度周期 = 15分钟-4小时
+            </div>
+            
+            <h3>3.C.3 综合能源服务</h3>
+            <p>面向工业园区、建筑楼宇的"冷-热-电-气-储"多能互补综合能源服务。</p>
+            
+            <table>
+                <tr><th>服务类型</th><th>内容</th><th>典型模式</th></tr>
+                <tr><td>能源供应</td><td>多能联供</td><td>天然气冷热电三联供(CCHP)</td></tr>
+                <tr><td>节能服务</td><td>能效提升</td><td>合同能源管理(EMC)</td></tr>
+                <tr><td>智能运维</td><td>设备托管</td><td>设备全生命周期管理</td></tr>
+                <tr><td>碳管理</td><td>碳核算/交易</td><td>碳账户+碳交易代理</td></tr>
+                <tr><td>绿电交易</td><td>购买绿证/绿电</td><td>直购PPA+分布式交易</td></tr>
+            </table>
+            
+            <h3>本章小结</h3>
+            <div class="advanced-box">
+                <ol>
+                    <li><strong>CCUS技术</strong>：燃烧后捕集最成熟（商业化），DAC是未来方向（成本待降），CO₂利用路径多元化</li>
+                    <li><strong>氢能冶金</strong>：绿氢替代焦炭是钢铁脱碳根本路径，2030年后逐步具备经济可行性</li>
+                    <li><strong>储能技术</strong>：磷酸铁锂主导短期，综合能源服务是能源企业转型方向</li>
+                </ol>
+            </div>
+            
+        </div>
+        
+        
+<div class="footer">
+            <a href="index.html">📚 目录</a> | 
+            <a href="chapter3.html">第3卷主体</a> | 
+            <a href="chapter4.html">第4卷：碳排放核算与报告体系</a>
+        </div>
+    </div>
+</body>
+</html>

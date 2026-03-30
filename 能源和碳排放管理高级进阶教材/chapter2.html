@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第2卷 能耗监测技术与数据分析方法</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', 'SimSun', Arial, sans-serif; line-height: 2.2; background: #f5f7fa; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; padding: 30px 50px; }
+        .header h1 { font-size: 2em; margin-bottom: 15px; }
+        .header .tag { background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 20px; display: inline-block; margin-top: 10px; }
+        .content { padding: 40px; }
+        h2 { color: #11998e; border-left: 6px solid #11998e; padding-left: 20px; margin: 40px 0 25px; font-size: 1.6em; }
+        h3 { color: #1a7f5e; margin: 30px 0 15px; font-size: 1.3em; }
+        h4 { color: #219658; margin: 25px 0 12px; font-size: 1.1em; }
+        p { margin-bottom: 18px; color: #333; font-size: 1.05em; }
+        .advanced-box { background: linear-gradient(135deg, #e8f8f5, #d1f2eb); border-left: 6px solid #11998e; padding: 25px; margin: 25px 0; border-radius: 8px; }
+        .tech-box { background: linear-gradient(135deg, #e0f7fa, #b2ebf2); border-left: 6px solid #00acc1; padding: 25px; margin: 25px 0; border-radius: 8px; }
+        .case-box { background: #f8f9fa; border: 2px solid #e9ecef; padding: 30px; margin: 30px 0; border-radius: 12px; }
+        .case-title { color: #11998e; font-weight: bold; margin-bottom: 15px; font-size: 1.2em; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95em; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background: #11998e; color: #fff; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .formula { background: linear-gradient(135deg, #e8f8f5, #d1f2eb); padding: 20px 30px; margin: 20px 0; border-radius: 8px; font-family: 'Times New Roman', serif; text-align: center; font-size: 1.1em; color: #11998e; font-weight: bold; border: 2px solid #11998e; }
+        ul, ol { margin: 15px 0 15px 35px; }
+        li { margin-bottom: 10px; color: #333; }
+        .python-code { white-space: pre-wrap;background: #1e1e1e; color: #9cdcfe; padding: 20px; border-radius: 8px; font-family: 'Consolas', monospace; font-size: 0.9em; overflow-x: auto; margin: 20px 0; line-height: 1.6; }
+        .footer { background: #11998e; color: #fff; padding: 25px 50px; text-align: center; font-size: 0.95em; }
+        .footer a { color: #fff; margin: 0 15px; }
+        .compare-table td { vertical-align: top; }
+        .compare-table td:first-child { font-weight: bold; color: #11998e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>第2卷 能耗监测技术与数据分析方法</h1>
+            <p>深度学习在能耗预测中的应用 · 数字孪生能源管理</p>
+            <p><a href="index.html" style="color:#fff;">📚 目录</a> | <a href="chapter1.html" style="color:#fff;">上一章</a> | <a href="chapter3.html" style="color:#fff;">下一章</a></p>
+        </div>
+<!-- ========== Part A: 深度学习 ========== -->
+            <h2 id="p1">📊 Part A：深度学习在能耗预测中的应用</h2>
+            
+            <div class="advanced-box">
+                <h3>2.A.1 深度学习 vs 传统方法对比</h3>
+                <p>深度学习模型相比传统统计方法，在处理非线性、时序依赖、特征交互等方面具有显著优势。</p>
+                <table>
+                    <tr><th>对比维度</th><th>传统方法（ARIMA/多元回归）</th><th>深度学习方法（LSTM/Transformer）</th></tr>
+                    <tr><td>非线性建模</td><td>需手动特征工程</td><td>自动学习非线性关系</td></tr>
+                    <tr><td>时序依赖</td><td>依赖差分/滞后特征</td><td>LSTM门控机制捕获长期依赖</td></tr>
+                    <tr><td>多源数据</td><td>融合困难</td><td>多输入通道，自然融合</td></tr>
+                    <tr><td>预测精度</td><td>均方误差MSE降低受限</td><td>均方误差MSE可降低20-40%</td></tr>
+                    <tr><td>可解释性</td><td>较高（线性模型）</td><td>较低（黑盒模型）</td></tr>
+                    <tr><td>数据需求</td><td>少量数据可用</td><td>需大量训练数据</td></tr>
+                </table>
+            </div>
+            
+            <h3>2.A.2 LSTM神经网络进阶</h3>
+            
+            <div class="tech-box">
+                <h4>2.A.2.1 LSTM核心公式详解</h4>
+                <p>LSTM（Long Short-Term Memory）通过门控机制解决传统RNN的梯度消失问题，适合处理长序列时序数据。</p>
+                
+                <div class="formula">
+                    f_t = σ(W_f · [h_{t-1}, x_t] + b_f)  【遗忘门：决定丢弃哪些信息】
+                </div>
+                
+                <div class="formula">
+                    i_t = σ(W_i · [h_{t-1}, x_t] + b_i)  【输入门：决定更新哪些信息】
+                </div>
+                
+                <div class="formula">
+                    C̃_t = tanh(W_C · [h_{t-1}, x_t] + b_C)  【候选记忆细胞】
+                </div>
+                
+                <div class="formula">
+                    C_t = f_t × C_{t-1} + i_t × C̃_t  【细胞状态更新】
+                </div>
+                
+                <div class="formula">
+                    o_t = σ(W_o · [h_{t-1}, x_t] + b_o)  【输出门】
+                </div>
+                
+                <div class="formula">
+                    h_t = o_t × tanh(C_t)  【隐藏状态输出】
+                </div>
+                
+                <p style="margin-top:15px;font-size:0.9em;color:#555;">
+                    其中：σ=sigmoid激活函数（输出0-1），tanh=双曲正切激活函数（输出-1至1），W和b为可学习权重和偏置，[h_{t-1}, x_t]表示向量拼接。
+                </p>
+            </div>
+            
+            <h4>2.A.2.2 BiLSTM（双向LSTM）</h4>
+            <p>BiLSTM同时利用前向和后向信息，对于需要全局上下文理解的预测任务效果更佳。</p>
+            
+            <div class="formula">
+                h_forward = LSTM_forward(x_1, x_2, ..., x_t)<br/>
+                h_backward = LSTM_backward(x_t, x_{t-1}, ..., x_1)<br/>
+                h_combined = [h_forward; h_backward]
+            </div>
+            
+            <h4>2.A.2.3 注意力机制Attention</h4>
+            <p>注意力机制让模型自动学习不同时刻信息的重要性权重，提升模型的可解释性和预测精度。</p>
+            
+            <div class="formula">
+                Attention(Q, K, V) = softmax(QK^T / √d_k) × V<br/>
+                其中：Q=查询向量，K=键向量，V=值向量，d_k=键向量维度
+            </div>
+            
+            <h4>2.A.2.4 基于Transformer架构的能源预测</h4>
+            <p>Transformer架构完全基于Attention机制，2017年由Google提出，在NLP领域取得突破，近年来在时序预测中表现优异。</p>
+            
+            <div class="formula">
+                Transformer = Multi-Head Self-Attention + Position Encoding + Feed-Forward Network
+            </div>
+            
+            <div class="python-code">
+#📌LSTM 能耗预测完整实现（Python + TensorFlow/Keras）
+
+import numpy as np
+import pandas as pd
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional, Attention
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
+
+# ========================= 1. 数据准备 =========================
+# 示例：生成模拟数据（实际应用时请替换为真实数据加载）
+# 假设有 10000 条数据，包含 3 个特征（例如温度、湿度、历史能耗）和目标值（未来能耗）
+np.random.seed(42)
+n_samples = 10000
+n_features_input = 3  # 输入特征数（不包含目标值）
+
+# 生成随机数据
+X_raw = np.random.randn(n_samples, n_features_input)  # 输入特征
+y_raw = np.random.randn(n_samples)                    # 目标值
+
+# 实际使用时，可以这样加载数据：
+# data = pd.read_csv('energy_data.csv')
+# X_raw = data[['temp', 'humidity', 'previous_energy']].values
+# y_raw = data['target_energy'].values
+
+# ========================= 2. 数据预处理 =========================
+def create_sequences(data, seq_length, target_col=-1):
+    """
+    创建时序样本序列
+    :param data: 形状为 (n_samples, n_features) 的数组，最后一列为目标值
+    :param seq_length: 时间步长
+    :param target_col: 目标值所在的列索引（默认 -1，即最后一列）
+    :return: X: (n_samples - seq_length, seq_length, n_features)
+             y: (n_samples - seq_length,)
+    """
+    X, y = [], []
+    for i in range(len(data) - seq_length):
+        X.append(data[i:i + seq_length, :])          # 多特征输入
+        y.append(data[i + seq_length, target_col])   # 目标变量
+    return np.array(X), np.array(y)
+
+# 归一化
+scaler_X = MinMaxScaler(feature_range=(0, 1))
+scaler_y = MinMaxScaler(feature_range=(0, 1))
+
+X_scaled = scaler_X.fit_transform(X_raw)                      # 归一化输入特征
+y_scaled = scaler_y.fit_transform(y_raw.reshape(-1, 1))       # 归一化目标
+
+# 合并特征与目标，用于构建序列（目标值也作为历史信息的一部分）
+data_scaled = np.column_stack([X_scaled, y_scaled])
+
+# 序列参数
+SEQ_LENGTH = 24   # 使用过去24小时的数据预测下一小时
+X, y = create_sequences(data_scaled, SEQ_LENGTH, target_col=-1)
+
+# 划分训练集/验证集/测试集（70/15/15）
+train_size = int(len(X) * 0.7)
+val_size = int(len(X) * 0.15)
+
+X_train = X[:train_size]
+y_train = y[:train_size]
+
+X_val = X[train_size:train_size + val_size]
+y_val = y[train_size:train_size + val_size]
+
+X_test = X[train_size + val_size:]
+y_test = y[train_size + val_size:]
+
+# 定义特征数（输入形状所需）
+n_features = data_scaled.shape[1]   # 特征数 = 输入特征数 + 1（目标值）
+print(f"输入序列形状: (batch, {SEQ_LENGTH}, {n_features})")
+
+# ========================= 3. 构建模型 =========================
+model = Sequential([
+    # 双向LSTM层，返回序列以连接下一层LSTM
+    Bidirectional(LSTM(128, return_sequences=True, input_shape=(SEQ_LENGTH, n_features))),
+    Dropout(0.2),
+
+    # 第二层双向LSTM，仍返回序列（供注意力层使用）
+    Bidirectional(LSTM(64, return_sequences=True)),
+    Dropout(0.2),
+
+    # 注意力层：对时间步自适应加权（自注意力）
+    # 注意：Attention 层默认将输入同时作为 query 和 value，实现自注意力
+    Attention(use_scale=True),
+
+    # 全连接层
+    Dense(32, activation='relu'),
+    Dropout(0.1),
+
+    # 输出层
+    Dense(1)
+])
+
+model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+model.summary()  # 打印模型结构
+
+# ========================= 4. 训练策略 =========================
+early_stop = EarlyStopping(monitor='val_loss', patience=15, restore_best_weights=True)
+lr_scheduler = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=5, min_lr=1e-6)
+
+history = model.fit(
+    X_train, y_train,
+    epochs=200,
+    batch_size=64,
+    validation_data=(X_val, y_val),
+    callbacks=[early_stop, lr_scheduler],
+    verbose=1
+)
+
+# ========================= 5. 预测与评估 =========================
+y_pred_scaled = model.predict(X_test)
+y_pred = scaler_y.inverse_transform(y_pred_scaled)
+y_true = scaler_y.inverse_transform(y_test.reshape(-1, 1))
+
+mse = mean_squared_error(y_true, y_pred)
+rmse = np.sqrt(mse)
+mae = mean_absolute_error(y_true, y_pred)
+mape = mean_absolute_percentage_error(y_true, y_pred) * 100
+
+print(f"RMSE: {rmse:.4f}")
+print(f"MAE: {mae:.4f}")
+print(f"MAPE: {mape:.2f}%")
+
+# 可选：绘制训练曲线
+import matplotlib.pyplot as plt
+plt.plot(history.history['loss'], label='train_loss')
+plt.plot(history.history['val_loss'], label='val_loss')
+plt.legend()
+plt.title('Model Loss')
+plt.show()
+            </div>
+            
+            <h4>2.A.2.5 XGBoost与LightGBM集成方法</h4>
+            <p>XGBoost和LightGBM是梯度提升决策树的高效实现，在结构化数据预测中表现优异，可作为LSTM的集成补充。</p>
+            
+            <div class="formula">
+                Obj(θ) = ΣL(y_i, ŷ_i) + ΣΩ(f_k)  【XGBoost目标函数】<br/>
+                Obj = Σ[ g_i·w_j + ½·h_i·w_j² ] + λ·J  【叶子节点最优权重】<br/>
+                其中：g_i=一阶梯度，h_i=二阶梯度，w_j=叶子节点权重，Ω=正则化项
+            </div>
+            
+            <div class="formula">
+                LightGBM优势：<br/>
+                - 基于直方图算法（Histogram-based），训练速度提升10倍<br/>
+                - GOSS（梯度单边采样）减少计算量<br/>
+                - EFB（互斥特征捆绑）处理高维稀疏数据
+            </div>
+            
+            <div class="python-code">
+# 📌 LightGBM能耗预测
+
+import pandas as pd
+import numpy as np
+import lightgbm as lgb
+from sklearn.model_selection import TimeSeriesSplit
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, mean_squared_error
+
+# ========================= 假设 df 已加载 =========================
+# df = pd.read_csv(...)  # 假设数据已加载，索引为 datetime 类型
+# df.index = pd.to_datetime(df.index)  # 确保索引是时间类型
+
+# ========================= 特征工程 =========================
+df['hour'] = df.index.hour
+df['dayofweek'] = df.index.dayofweek
+df['is_weekend'] = (df['dayofweek'] >= 5).astype(int)
+df['month'] = df.index.month
+df['lag_1h'] = df['energy'].shift(1)
+df['rolling_mean_24h'] = df['energy'].rolling(24).mean()
+df['rolling_std_24h'] = df['energy'].rolling(24).std()
+
+# 删除含 NaN 的行（由滞后和滚动特征产生）
+df = df.dropna()
+
+# ========================= 划分训练集/测试集 =========================
+X = df.drop('energy', axis=1)
+y = df['energy']
+split_idx = int(len(X) * 0.8)
+X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
+y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
+
+# ========================= 可选：特征标准化 =========================
+# 注意：树模型一般不需要标准化，此处仅作为示例，可通过注释启用
+USE_STANDARDIZATION = False
+if USE_STANDARDIZATION:
+    scaler = StandardScaler()
+    X_train = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns, index=X_train.index)
+    X_test = pd.DataFrame(scaler.transform(X_test), columns=X_test.columns, index=X_test.index)
+
+# ===================== 时序交叉验证 (TimeSeriesSplit)=====================
+print("=== 时序交叉验证 ===")
+tscv = TimeSeriesSplit(n_splits=3)  # 可调整折数
+cv_scores = []
+
+for fold, (train_idx, val_idx) in enumerate(tscv.split(X_train)):
+    X_tr, X_val = X_train.iloc[train_idx], X_train.iloc[val_idx]
+    y_tr, y_val = y_train.iloc[train_idx], y_train.iloc[val_idx]
+    
+    train_data = lgb.Dataset(X_tr, label=y_tr)
+    valid_data = lgb.Dataset(X_val, label=y_val, reference=train_data)
+    
+    params = {
+        'objective': 'regression',
+        'metric': 'mape',
+        'boosting_type': 'gbdt',
+        'num_leaves': 63,
+        'learning_rate': 0.05,
+        'feature_fraction': 0.8,
+        'bagging_fraction': 0.8,
+        'bagging_freq': 5,
+        'verbose': -1
+    }
+    
+    model_cv = lgb.train(
+        params,
+        train_data,
+        num_boost_round=1000,
+        valid_sets=[valid_data],
+        callbacks=[lgb.early_stopping(50), lgb.log_evaluation(0)]  # 不打印细节
+    )
+    
+    y_pred_val = model_cv.predict(X_val)
+    mape_val = mean_absolute_percentage_error(y_val, y_pred_val)
+    cv_scores.append(mape_val)
+    print(f"Fold {fold+1} - MAPE: {mape_val:.4f}")
+
+print(f"平均 CV MAPE: {np.mean(cv_scores):.4f} (±{np.std(cv_scores):.4f})\n")
+
+# ========================= 最终模型训练 =========================
+print("=== 训练最终模型 ===")
+train_data = lgb.Dataset(X_train, label=y_train)
+valid_data = lgb.Dataset(X_test, label=y_test, reference=train_data)  # 使用测试集作为验证（早停）
+
+model = lgb.train(
+    params,
+    train_data,
+    num_boost_round=1000,
+    valid_sets=[train_data, valid_data],
+    callbacks=[lgb.early_stopping(50), lgb.log_evaluation(100)]
+)
+
+# ========================= 测试集评估 =========================
+print("\n=== 测试集评估 ===")
+y_pred = model.predict(X_test)
+
+mape = mean_absolute_percentage_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+
+print(f"MAPE: {mape:.4f} ({mape*100:.2f}%)")
+print(f"MAE : {mae:.2f}")
+print(f"RMSE: {rmse:.2f}")
+
+# ========================= 特征重要性 =========================
+importance = pd.DataFrame({
+    'feature': X.columns,
+    'importance': model.feature_importance(importance_type='gain')
+}).sort_values('importance', ascending=False)
+print("\n特征重要性（按增益）:")
+print(importance)            
+            </div>
+            
+            <h4>2.A.2.6 模型融合策略</h4>
+            <p>将LSTM与XGBoost融合，可同时捕获时序依赖和复杂特征交互。</p>
+            
+            <div class="formula">
+                ŷ_fusion = α × ŷ_LSTM + (1-α) × ŷ_XGBoost<br/>
+                最优权重α通过验证集优化确定
+            </div>
+            
+            <div class="case-box">
+                <div class="case-title">📊 工业建筑能耗预测实验对比</div>
+                <table>
+                    <tr><th>模型</th><th>RMSE(kWh)</th><th>MAE(kWh)</th><th>MAPE(%)</th><th>训练时间</th></tr>
+                    <tr><td>ARIMA</td><td>342</td><td>267</td><td>8.2%</td><td>快速</td></tr>
+                    <tr><td>随机森林</td><td>298</td><td>231</td><td>7.1%</td><td>中等</td></tr>
+                    <tr><td>XGBoost</td><td>263</td><td>204</td><td>6.3%</td><td>中等</td></tr>
+                    <tr><td>LSTM</td><td>218</td><td>169</td><td>5.2%</td><td>较长</td></tr>
+                    <tr><td>BiLSTM+Attention</td><td>186</td><td>144</td><td>4.4%</td><td>较长</td></tr>
+                    <tr><td>LSTM+XGBoost融合</td><td>171</td><td>132</td><td>4.0%</td><td>长</td></tr>
+                </table>
+                <p style="margin-top:15px;font-size:0.95em;color:#666;">实验条件：某工业建筑，15分钟分辨率数据，测试集120天，外部特征含温度、湿度、日期类型。</p>
+            </div>
+            
+            <!-- ========== Part B: 数字孪生 ========== -->
+            <h2 id="p2">🔄 Part B：数字孪生能源管理</h2>
+            
+            <div class="advanced-box">
+                <h3>2.B.1 数字孪生概念与架构</h3>
+                <p><strong>数字孪生（Digital Twin）</strong>是物理实体在数字空间的实时映射，通过数据驱动+机理模型的融合，实现物理系统的实时监测、预测优化和自主控制。</p>
+                
+                <div class="formula">
+                    Digital_Twin = Physical_Entity + Digital_Model + Data_Connection + Intelligence
+                </div>
+                
+                <h4>数字孪生发展历程</h4>
+                <table>
+                    <tr><th>阶段</th><th>时间</th><th>特征</th><th>典型应用</th></tr>
+                    <tr><td>概念提出</td><td>2002-2010</td><td>产品设计阶段的数字映射</td><td>NASA航天器设计</td></tr>
+                    <tr><td>工程应用</td><td>2010-2018</td><td>制造过程数字孪生</td><td>GE、西门子工厂</td></tr>
+                    <tr><td>智慧城市</td><td>2018-2021</td><td>城市级数字孪生</td><td>新加坡雄安新区</td></tr>
+                    <tr><td>能源孪生</td><td>2021-至今</td><td>能源系统数字孪生</td><td>智慧能源、微电网</td></tr>
+                </table>
+            </div>
+            
+            <h3>2.B.2 能源系统数字孪生架构</h3>
+            
+            <div class="tech-box">
+                <h4>五层架构模型</h4>
+                <table>
+                    <tr><th>层次</th><th>功能</th><th>关键技术</th><th>数据流</th></tr>
+                    <tr><td>物理层</td><td>真实能源设备和系统</td><td>IoT传感器、智能仪表</td><td>设备运行数据↑</td></tr>
+                    <tr><td>感知层</td><td>数据采集与预处理</td><td>SCADA、边缘网关</td><td>实时数据流↑</td></tr>
+                    <tr><td>数字孪生层</td><td>3D模型+机理模型+数据驱动模型</td><td>Unity/Unreal、MATLAB</td><td>同步映射↔</td></tr>
+                    <tr><td>分析层</td><td>仿真优化、预测决策</td><td>AI引擎、优化求解器</td><td>分析结果↑</td></tr>
+                    <tr><td>应用层</td><td>可视化、运维管理</td><td>Web/App/大屏</td><td>指令↓</td></tr>
+                </table>
+            </div>
+            
+            <h3>2.B.3 能源数字孪生关键技术</h3>
+            
+            <h4>2.B.3.1 机理模型与数据驱动融合</h4>
+            <p>纯机理模型难以精确描述复杂非线性系统，纯数据驱动模型缺乏物理可解释性。融合方法是最佳选择。</p>
+            
+            <div class="formula">
+                融合模型 = θ × 物理方程 + (1-θ) × 神经网络<br/><br/>
+                例如：<br/>
+                E_predicted = F_mechanical(V, I, T) + ε_neural_residual<br/>
+                其中：F_mechanical由热力学方程推导，ε_neural_residual由LSTM学习残差
+            </div>
+            
+            <h4>2.B.3.2 多尺度建模</h4>
+            <p>能源系统涉及设备级、系统级和园区级多个尺度，需要多尺度耦合建模。</p>
+            
+            <table>
+                <tr><th>尺度</th><th>建模对象</th><th>模型类型</th><th>时间分辨率</th></tr>
+                <tr><td>设备级</td><td>单台设备（电机/锅炉）</td><td>CFD仿真、等效电路</td><td>秒~分钟</td></tr>
+                <tr><td>系统级</td><td>工艺系统（空压/冷冻）</td><td>稳态仿真、动态仿真</td><td>分钟~小时</td></tr>
+                <tr><td>园区级</td><td>多能互补综合能源</td><td>能量流优化模型</td><td>小时~天</td></tr>
+                <tr><td>电网级</td><td>电力系统调度</td><td>经济调度模型</td><td>15分钟~小时</td></tr>
+            </table>
+            
+            <h4>2.B.3.3 实时数据同步技术</h4>
+            
+            <div class="python-code">
+# 📌 数字孪生数据同步架构（Python + MQTT + TimescaleDB）
+
+import paho.mqtt.client as mqtt
+import psycopg2
+from psycopg2 import pool
+import json
+import pandas as pd
+from datetime import datetime
+import threading
+import time
+import logging
+
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# 配置参数
+MQTT_BROKER = "mqtt.broker.com"   # 替换为实际 MQTT 服务器
+MQTT_PORT = 1883
+MQTT_TOPIC = "plant/+/+/+/+"      # 订阅所有设备数据
+
+DB_HOST = "localhost"
+DB_PORT = 5432
+DB_NAME = "energy_twin"
+DB_USER = "your_user"            # 替换为实际数据库用户
+DB_PASSWORD = "your_password"    # 替换为实际数据库密码
+
+ANOMALY_THRESHOLD = 0.8           # 异常检测阈值，可根据实际调整
+
+# 创建数据库连接池（线程安全）
+db_pool = psycopg2.pool.SimpleConnectionPool(
+    1, 20,  # 最小连接数，最大连接数
+    host=DB_HOST,
+    port=DB_PORT,
+    dbname=DB_NAME,
+    user=DB_USER,
+    password=DB_PASSWORD
+)
+
+# 初始化数据库表（若不存在）
+def init_db():
+    conn = db_pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            # 创建时序表（TimescaleDB 超表）
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS equipment_sensors (
+                    time TIMESTAMPTZ NOT NULL,
+                    plant_id TEXT NOT NULL,
+                    equipment_id TEXT NOT NULL,
+                    sensor_type TEXT NOT NULL,
+                    value DOUBLE PRECISION NOT NULL
+                );
+                SELECT create_hypertable('equipment_sensors', 'time', if_not_exists => TRUE);
+            """)
+            conn.commit()
+            logger.info("数据库表初始化完成")
+    except Exception as e:
+        logger.error(f"数据库初始化失败: {e}")
+    finally:
+        db_pool.putconn(conn)
+
+# 数字孪生相关函数（占位实现，需根据实际模型替换）
+def load_model(equipment_id):
+    """加载对应设备的 AI 模型（示例：返回一个简单的预测函数）"""
+    # 实际应加载预训练模型，这里返回一个模拟预测器
+    logger.info(f"加载设备 {equipment_id} 的模型")
+    # 示例：简单线性模型（仅作演示）
+    def predict(features):
+        # 假设 features 是一个列表，返回预测值
+        return sum(features) / len(features) if features else 0.0
+    return predict
+
+def get_latest_features(equipment_id, n_history=24):
+    """从数据库获取设备最近 n 个历史数据，构造特征向量"""
+    conn = db_pool.getconn()
+    try:
+        with conn.cursor() as cur:
+            # 查询最近 n 条记录（按时间降序）
+            cur.execute("""
+                SELECT value FROM equipment_sensors
+                WHERE equipment_id = %s
+                ORDER BY time DESC
+                LIMIT %s
+            """, (equipment_id, n_history))
+            rows = cur.fetchall()
+            # 转为列表，不足时填充 0
+            features = [row[0] for row in rows][::-1]  # 升序排列（旧到新）
+            if len(features) < n_history:
+                features = [0.0] * (n_history - len(features)) + features
+            return features
+    except Exception as e:
+        logger.error(f"获取特征失败: {e}")
+        return [0.0] * n_history
+    finally:
+        db_pool.putconn(conn)
+
+def detect_anomaly(features, prediction):
+    """异常检测：返回异常分数（示例基于残差）"""
+    # 实际可采用更复杂方法，这里简单用实际最新值（如果有）与预测值的差异
+    if not features:
+        return 0.0
+    actual = features[-1]  # 最近的实际值
+    residual = abs(actual - prediction)
+    # 归一化（假设值范围0-100），返回0~1之间的分数
+    score = min(1.0, residual / 100.0)
+    return score
+
+def trigger_alert(equipment_id, anomaly_score):
+    """触发告警（示例：打印日志，可扩展为发送邮件、微信等）"""
+    logger.warning(f"⚠️ 设备 {equipment_id} 异常告警，异常分数: {anomaly_score:.2f}")
+
+def update_digital_twin(equipment_id, sensor_type, value):
+    """基于实时数据更新数字孪生模型"""
+    try:
+        # 加载对应设备的 AI 模型
+        model = load_model(equipment_id)
+        
+        # 获取最新输入特征（历史24个值）
+        features = get_latest_features(equipment_id, n_history=24)
+        
+        # 运行预测
+        prediction = model(features)
+        logger.info(f"设备 {equipment_id} 预测值: {prediction:.2f}")
+        
+        # 检测异常
+        anomaly_score = detect_anomaly(features, prediction)
+        if anomaly_score > ANOMALY_THRESHOLD:
+            trigger_alert(equipment_id, anomaly_score)
+        
+        return prediction
+    except Exception as e:
+        logger.error(f"更新数字孪生失败: {e}")
+        return None
+
+# MQTT 回调函数
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        logger.info("MQTT 连接成功")
+        client.subscribe(MQTT_TOPIC)
+    else:
+        logger.error(f"MQTT 连接失败，返回码: {rc}")
+
+def on_message(client, userdata, msg):
+    topic = msg.topic
+    try:
+        payload = json.loads(msg.payload)
+        # 提取设备标识
+        parts = topic.split('/')
+        if len(parts) < 4:
+            logger.warning(f"主题格式错误: {topic}")
+            return
+        plant_id = parts[0]
+        equipment_id = parts[2]
+        sensor_type = parts[3]
+        value = payload.get('value')
+        timestamp = payload.get('timestamp')
+        
+        if value is None or timestamp is None:
+            logger.warning(f"消息缺少必要字段: {payload}")
+            return
+        
+        # 转换时间戳（假设字符串格式 ISO 8601）
+        if isinstance(timestamp, str):
+            timestamp = datetime.fromisoformat(timestamp)
+        
+        # 写入 TimescaleDB（使用连接池获取连接）
+        conn = db_pool.getconn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    INSERT INTO equipment_sensors 
+                    (time, plant_id, equipment_id, sensor_type, value)
+                    VALUES (%s, %s, %s, %s, %s)
+                """, (timestamp, plant_id, equipment_id, sensor_type, value))
+                conn.commit()
+        except Exception as e:
+            logger.error(f"数据库写入失败: {e}")
+            conn.rollback()
+        finally:
+            db_pool.putconn(conn)
+        
+        # 触发数字孪生更新（可选异步，避免阻塞消息处理）
+        threading.Thread(target=update_digital_twin, args=(equipment_id, sensor_type, value)).start()
+        
+    except json.JSONDecodeError:
+        logger.error(f"无效 JSON 负载: {msg.payload}")
+    except Exception as e:
+        logger.error(f"消息处理异常: {e}")
+
+# 启动 MQTT 客户端
+def start_mqtt():
+    client = mqtt.Client()
+    client.on_connect = on_connect
+    client.on_message = on_message
+    client.connect(MQTT_BROKER, MQTT_PORT, 60)
+    client.loop_forever()  # 阻塞运行，保持连接
+
+if __name__ == "__main__":
+    init_db()          # 初始化数据库表
+    start_mqtt()       # 启动 MQTT 客户端
+            </div>
+            
+            <h4>2.B.3.4 3D可视化技术</h4>
+            <p>基于WebGL和游戏引擎的3D可视化，将能源系统直观呈现。</p>
+            
+            <table>
+                <tr><th>技术方案</th><th>适用场景</th><th>渲染能力</th><th>开发成本</th></tr>
+                <tr><td>Three.js (WebGL)</td><td>Web端3D展示</td><td>中等</td><td>低</td></tr>
+                <tr><td>Unity WebGL</td><td>复杂3D交互</td><td>高</td><td>中</td></tr>
+                <tr><td>UE4/UE5</td><td>照片级渲染</td><td>极高</td><td>高</td></tr>
+                <tr><td>Blender + Three.js</td><td>定制化展示</td><td>高</td><td>中</td></tr>
+                <tr><td>BIM + 能源管理</td><td>建筑能源</td><td>高</td><td>高</td></tr>
+            </table>
+            
+            <h3>2.B.4 能源数字孪生应用场景</h3>
+            
+            <div class="case-box">
+                <div class="case-title">📊 典型应用案例：某钢铁企业数字孪生能源管理平台</div>
+                <p><strong>系统架构：</strong></p>
+                <ul>
+                    <li>接入设备：8000+传感器、50+ PLC、20+ DCS系统</li>
+                    <li>孪生对象：高炉、转炉、轧机、空分站、锅炉房</li>
+                    <li>实时数据：15个分厂、200+关键设备、5000+测点</li>
+                    <li>更新频率：重要参数秒级更新，分析结果分钟级</li>
+                </ul>
+                
+                <p><strong>核心功能：</strong></p>
+                <table>
+                    <tr><th>功能</th><th>技术实现</th><th>效果</th></tr>
+                    <tr><td>3D设备可视化</td><td>Unity + 实时数据绑定</td><td>直观掌握设备状态</td></tr>
+                    <tr><td>能耗预测</td><td>LSTM + 机理融合</td><td>提前24h预测精度92%</td></tr>
+                    <tr><td>最优运行优化</td><td>深度强化学习(DDPG)</td><td>综合能效提升5.8%</td></tr>
+                    <tr><td>故障预警</td><td>变分自编码器(VAE)</td><td>提前72h预警准确率89%</td></tr>
+                    <tr><td>碳排放核算</td><td>实时MRV</td><td>满足碳核查要求</td></tr>
+                </table>
+                
+                <p><strong>经济效益：</strong>年节约能源成本约3200万元，减少非计划停机约800小时/年。</p>
+            </div>
+            
+            <h3>2.B.5 数字孪生实施路线图</h3>
+            
+            <table>
+                <tr><th>阶段</th><th>时间</th><th>内容</th><th>交付物</th></tr>
+                <tr><td>基础建设</td><td>0-6月</td><td>数据采集体系建设、历史数据清洗</td><td>数据中台</td></tr>
+                <tr><td>模型构建</td><td>6-12月</td><td>核心设备机理建模、数据驱动模型训练</td><td>孪生模型库</td></tr>
+                <tr><td>平台开发</td><td>12-18月</td><td>3D可视化、大屏展示、APP开发</td><td>数字孪生平台</td></tr>
+                <tr><td>智能应用</td><td>18-24月</td><td>预测优化、自主演控制</td><td>智能决策引擎</td></tr>
+            </table>
+            
+            <h3>本章小结</h3>
+            <div class="advanced-box">
+                <ol>
+                    <li><strong>深度学习方法</strong>：LSTM/BiLSTM/Transformer在能耗预测中精度显著优于传统方法，融合模型可进一步提升</li>
+                    <li><strong>数字孪生技术</strong>：物理-数字实时映射，机理+数据融合建模，实现能源系统的虚实联动</li>
+                    <li><strong>实施建议</strong>：数据质量是基础，模型选择需结合业务场景，小步快跑持续迭代</li>
+                </ol>
+            </div>
+            
+        </div>
+        
+        
+<div class="footer">
+            <a href="index.html">📚 目录</a> | 
+            <a href="chapter2.html">第2卷主体</a> | 
+            <a href="chapter3.html">第3卷：工业节能技术与系统优化</a>
+        </div>
+    </div>
+</body>
+</html>
